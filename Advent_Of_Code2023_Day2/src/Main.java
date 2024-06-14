@@ -10,7 +10,7 @@ public class Main {
             Scanner scanner = new Scanner(input);
             for (int i = 0; i < input.length(); i++){ //foring through the input data
                 if (scanner.hasNextLine()) {
-                    out += finalFunction(scanner.nextLine()); //final function returns game's number if it was possible
+                    out += finalFunctionForPartOne(scanner.nextLine()); //final function returns game's number if it was possible
                 }
             }
             System.out.println(out);
@@ -20,7 +20,7 @@ public class Main {
         }
     }
 
-    public static int finalFunction(String line){
+    public static int finalFunctionForPartOne(String line){
         String[] gameIntAndSets = splitAtColons(line); //gameIntAndSets contains "Game x" and all subsets in a single line
         String[] Sets = splitAtSemicolons(gameIntAndSets[1]); //Sets contains single subsets
 
@@ -32,6 +32,17 @@ public class Main {
         //If none of the subsets were impossible, the function returns int "x" from "Game x"
         return getID(gameIntAndSets[0]);
     }
+
+    public static int finalFunctionForPartTwo(String line){
+        String[] gameIntAndSets = splitAtColons(line);
+        String[] Sets = splitAtSemicolons(gameIntAndSets[1]);
+        for (int i = 0; i< Sets.length; i++){
+            
+        }
+
+        return 0;
+    }
+
 
     public static boolean isPossible(String SingleSet){ //Checks if a single subset is possible
         String[] data = SingleSet.split(", "); //The amounts of cubes are formatted in the following style: "x red, y green, z blue" in no particular order of colors
