@@ -63,4 +63,18 @@ class MainTest {
         Assertions.assertArrayEquals(new String[]{"3 blue, 4 red", "1 red, 2 green, 6 blue", "2 green"}, Main.splitAtSemicolons("3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"));
         Assertions.assertArrayEquals(new String[]{"1 blue, 2 green", "3 green, 4 blue, 1 red", "1 green, 1 blue"}, Main.splitAtSemicolons("1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue"));
     }
+
+    @Test
+    void TestGetID(){
+        Assertions.assertEquals(1, Main.getID("Game 1"));
+        Assertions.assertEquals(2, Main.getID("Game 2"));
+        Assertions.assertEquals(3, Main.getID("Game 3"));
+        Assertions.assertEquals(4, Main.getID("Game 4"));
+        Assertions.assertEquals(5, Main.getID("Game 5"));
+        Assertions.assertEquals(6, Main.getID("Game 6"));
+        Assertions.assertEquals(7, Main.getID("Game 7"));
+        Assertions.assertEquals(8, Main.getID("Game 8"));
+        Assertions.assertEquals(9, Main.getID("Game 9"));
+        Assertions.assertEquals(10, Main.getID("Game 10"));
+    }
 }
