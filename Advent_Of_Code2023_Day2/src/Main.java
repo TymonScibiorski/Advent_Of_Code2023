@@ -36,12 +36,21 @@ public class Main {
     public static int finalFunctionForPartTwo(String line){
         String[] gameIntAndSets = splitAtColons(line);
         String[] Sets = splitAtSemicolons(gameIntAndSets[1]);
+
+        int out = 1;
         for (int i = 0; i< Sets.length; i++){
             
         }
 
-        return 0;
+        return out;
     }
+
+    public static int productOfTheSmallestAmountOfCubesForAGame(String[] Sets){ //wait, this is actually what the final function is supposed to do
+        int[] theSmallestAmountOfCubesForAGame = theSmallestAmountOfCubesForAGame(Sets);
+        return theSmallestAmountOfCubesForAGame[0]*theSmallestAmountOfCubesForAGame[1]*theSmallestAmountOfCubesForAGame[2];
+    }
+
+    public static int[] theSmallestAmountOfCubesForAGame(String[] Sets){}
 
 
     public static boolean isPossible(String SingleSet){ //Checks if a single subset is possible
