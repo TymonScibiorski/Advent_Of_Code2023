@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+//changing the Is$color methods to take a single string, as well as tests, other methods related to/using them and comments
+
 public class Main {
     public static void main(String[] args) {
         int out = 0;
