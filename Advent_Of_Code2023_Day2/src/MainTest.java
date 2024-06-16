@@ -32,9 +32,9 @@ class MainTest {
 
     @Test
     void TestIsRed(){
-        Assertions.assertTrue(Main.IsRed(new String[]{"3 blue", "4 red"}, 1));
-        Assertions.assertTrue(Main.IsRed(new String[]{"8 green", "6 blue", "20 red"}, 2));
-        Assertions.assertFalse(Main.IsRed(new String[]{"8 green", "6 blue", "20 red"}, 1));
+        Assertions.assertTrue(Main.IsRed("4 red"));
+        Assertions.assertTrue(Main.IsRed("20 red"));
+        Assertions.assertFalse(Main.IsRed("6 blue"));
     }
 
     @Test

@@ -50,14 +50,24 @@ public class Main {
         return theSmallestAmountOfCubesForAGame[0]*theSmallestAmountOfCubesForAGame[1]*theSmallestAmountOfCubesForAGame[2];
     }
 
-    public static int[] theSmallestAmountOfCubesForAGame(String[] Sets){}
+    public static int[] theSmallestAmountOfCubesForAGame(String[] Sets){
+        int smallestAmountOfRedCubes = 0;
+        int smallestAmountOfGreenCubes = 0;
+        int smallestAmountOfBlueCubes = 0;
+        
+//        for (String subSet : Sets){
+//            if (smallestAmountOfRedCubes < amountOfRedCubes())
+//            if (smallestAmountOfCubes)
+//            if (smallestAmountOfCubes)
+//        }
+    }
 
 
     public static boolean isPossible(String SingleSet){ //Checks if a single subset is possible
         String[] data = SingleSet.split(", "); //The amounts of cubes are formatted in the following style: "x red, y green, z blue" in no particular order of colors
 
         for (int i = 0; i<data.length; i++) {
-            if (12 < amountOfRedCubes(data, i)) { //the limits were provided in the task description
+            if (12 < amountOfRedCubes(data[i])) { //the limits were provided in the task description
                 return false;
             }
 
@@ -72,39 +82,39 @@ public class Main {
         return true; //if none of the subsets exceeded the limit of 12 red, 13 green or 14 blue, then the game is possible
     }
 
-    public static int amountOfRedCubes(String[] data, int i){
-        if (IsRed(data, i)){
-                return Integer.parseInt(data[i].split(" ")[0]); //the values are separated from the color declaration by a space like so: "x red". The same is true for the following methods
+    public static int amountOfRedCubes(String NumberAndColorFromASingleSubset){ //expects an array containing subsets of a game 
+        if (IsRed(NumberAndColorFromASingleSubset)){
+                return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[0]); //the values are separated from the color declaration by a space like so: "x red". The same is true for the following methods
             }
         return 0;
     }
-    public static int amountOfGreenCubes(String[] data, int i){
-        if (IsGreen(data, i)){
-                return Integer.parseInt(data[i].split(" ")[0]);
+    public static int amountOfGreenCubes(String NumberAndColorFromASingleSubset){
+        if (IsGreen(NumberAndColorFromASingleSubset)){
+                return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[0]);
             }
         return 0;
     }
-    public static int amountOfBlueCubes(String[] data, int i){
-        if (IsBlue(data, i)){
-                return Integer.parseInt(data[i].split(" ")[0]);
+    public static int amountOfBlueCubes(String NumberAndColorFromASingleSubset){
+        if (IsBlue(NumberAndColorFromASingleSubset)){
+                return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[0]);
             }
         return 0;
     }
 
-    public static boolean IsRed(String[] data, int i){
-        if (data[i].matches("\\d+ red")){
+    public static boolean IsRed(String NumberAndColorFromASingleSubset){
+        if (NumberAndColorFromASingleSubset.matches("\\d+ red")){
             return true;
         }
         return false;
     }
-    public static boolean IsGreen(String[] data, int i){
-        if (data[i].matches("\\d+ green")){
+    public static boolean IsGreen(String NumberAndColorFromASingleSubset){
+        if (NumberAndColorFromASingleSubset.matches("\\d+ green")){
             return true;
         }
         return false;
     }
-    public static boolean IsBlue(String[] data, int i){
-        if (data[i].matches("\\d+ blue")){
+    public static boolean IsBlue(String NumberAndColorFromASingleSubset){
+        if (NumberAndColorFromASingleSubset.matches("\\d+ blue")){
             return true;
         }
         return false;
