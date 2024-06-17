@@ -39,15 +39,10 @@ public class Main {
         String[] gameIntAndSets = splitAtColons(line);
         String[] Sets = splitAtSemicolons(gameIntAndSets[1]);
 
-        int out = 1;
-        for (int i = 0; i< Sets.length; i++){
-            
-        }
-
-        return out;
+        return productOfTheSmallestAmountOfCubesForAGame(Sets);
     }
 
-    public static int productOfTheSmallestAmountOfCubesForAGame(String[] Sets){ //wait, this is actually what the final function is supposed to do
+    public static int productOfTheSmallestAmountOfCubesForAGame(String[] Sets){
         int[] theSmallestAmountOfCubesForAGame = theSmallestAmountOfCubesForAGame(Sets);
         return theSmallestAmountOfCubesForAGame[0]*theSmallestAmountOfCubesForAGame[1]*theSmallestAmountOfCubesForAGame[2];
     }
@@ -56,12 +51,20 @@ public class Main {
         int smallestAmountOfRedCubes = 0;
         int smallestAmountOfGreenCubes = 0;
         int smallestAmountOfBlueCubes = 0;
-        
-//        for (String subSet : Sets){
-//            if (smallestAmountOfRedCubes < amountOfRedCubes())
-//            if (smallestAmountOfCubes)
-//            if (smallestAmountOfCubes)
-//        }
+
+        for (String subSet : Sets){
+            if (smallestAmountOfRedCubes > amountOfRedCubes(subSet) || smallestAmountOfRedCubes == 0){
+                smallestAmountOfRedCubes = amountOfRedCubes(subSet);
+            }
+            if (smallestAmountOfGreenCubes > amountOfGreenCubes(subSet) || smallestAmountOfGreenCubes == 0){
+                smallestAmountOfGreenCubes = amountOfGreenCubes(subSet);
+            }
+            if (smallestAmountOfBlueCubes > amountOfBlueCubes(subSet) || smallestAmountOfBlueCubes == 0){
+                smallestAmountOfBlueCubes = amountOfBlueCubes(subSet);
+            }
+        }
+
+        return new int[]{smallestAmountOfRedCubes,smallestAmountOfGreenCubes,smallestAmountOfBlueCubes};
     }
 
 
@@ -73,11 +76,11 @@ public class Main {
                 return false;
             }
 
-            if (13 < amountOfGreenCubes(data, i)) {
+            if (13 < amountOfGreenCubes(data[i])) {
                 return false;
             }
 
-            if(14 < amountOfBlueCubes(data, i)){
+            if (14 < amountOfBlueCubes(data[i])){
                 return false;
             }
         }
