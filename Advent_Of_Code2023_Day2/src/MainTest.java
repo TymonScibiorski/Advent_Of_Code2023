@@ -40,10 +40,10 @@ class MainTest {
         Assertions.assertEquals(48, Main.productOfTheSmallestAmountOfCubesForAGame(new String[]{"3 blue, 4 red", "1 red, 2 green, 6 blue", "2 green"}));
     }
 
-//    @Test
-//    void TestTheSmallestAmountOfCubesForAGame(){
-//        Assertions.assertEquals(new int[]{1, 2, 3}, Main.theSmallestAmountOfCubesForAGame(new String[]{"3 blue, 4 red", "1 red, 2 green, 6 blue", "2 green"}));
-//    }
+    @Test
+    void TestTheSmallestAmountOfCubesForAGame(){
+        Assertions.assertEquals(new int[]{1, 2, 3}, Main.theSmallestAmountOfCubesForAGame(new String[]{"3 blue, 4 red", "1 red, 2 green, 6 blue", "2 green"}));
+    }
 
     @Test
     void TestAmountOfRedCubes(){
@@ -55,13 +55,13 @@ class MainTest {
         Assertions.assertEquals(6, Main.amountOfRedCubes("6 red"));
         Assertions.assertEquals(7, Main.amountOfRedCubes("7 red"));
         Assertions.assertEquals(8, Main.amountOfRedCubes("8 red"));
-        Assertions.assertEquals(9, Main.amountOfRedCubes("9 red"));
+        Assertions.assertEquals(9, Main.amountOfRedCubes(", 9 red"));
         Assertions.assertEquals(10, Main.amountOfRedCubes("10 red"));
         Assertions.assertEquals(11, Main.amountOfRedCubes("11 red"));
         Assertions.assertEquals(12, Main.amountOfRedCubes("12 red"));
         Assertions.assertEquals(13, Main.amountOfRedCubes("13 red"));
         Assertions.assertEquals(14, Main.amountOfRedCubes("14 red"));
-        Assertions.assertEquals(15, Main.amountOfRedCubes("15 red"));
+        Assertions.assertEquals(15, Main.amountOfRedCubes(" 15 red"));
     }
 
     @Test
@@ -74,13 +74,13 @@ class MainTest {
         Assertions.assertEquals(6, Main.amountOfGreenCubes("6 green"));
         Assertions.assertEquals(7, Main.amountOfGreenCubes("7 green"));
         Assertions.assertEquals(8, Main.amountOfGreenCubes("8 green"));
-        Assertions.assertEquals(9, Main.amountOfGreenCubes("9 green"));
+        Assertions.assertEquals(9, Main.amountOfGreenCubes(" 9 green"));
         Assertions.assertEquals(10, Main.amountOfGreenCubes("10 green"));
         Assertions.assertEquals(11, Main.amountOfGreenCubes("11 green"));
         Assertions.assertEquals(12, Main.amountOfGreenCubes("12 green"));
         Assertions.assertEquals(13, Main.amountOfGreenCubes("13 green"));
         Assertions.assertEquals(14, Main.amountOfGreenCubes("14 green"));
-        Assertions.assertEquals(15, Main.amountOfGreenCubes("15 green"));
+        Assertions.assertEquals(15, Main.amountOfGreenCubes(" 15 green"));
     }
 
     @Test
@@ -93,19 +93,19 @@ class MainTest {
         Assertions.assertEquals(6, Main.amountOfBlueCubes("6 blue"));
         Assertions.assertEquals(7, Main.amountOfBlueCubes("7 blue"));
         Assertions.assertEquals(8, Main.amountOfBlueCubes("8 blue"));
-        Assertions.assertEquals(9, Main.amountOfBlueCubes("9 blue"));
+        Assertions.assertEquals(9, Main.amountOfBlueCubes(" 9 blue"));
         Assertions.assertEquals(10, Main.amountOfBlueCubes("10 blue"));
         Assertions.assertEquals(11, Main.amountOfBlueCubes("11 blue"));
         Assertions.assertEquals(12, Main.amountOfBlueCubes("12 blue"));
         Assertions.assertEquals(13, Main.amountOfBlueCubes("13 blue"));
         Assertions.assertEquals(14, Main.amountOfBlueCubes("14 blue"));
-        Assertions.assertEquals(15, Main.amountOfBlueCubes("15 blue"));
+        Assertions.assertEquals(15, Main.amountOfBlueCubes(" 15 blue"));
     }
 
     @Test
     void TestIsRed(){
         Assertions.assertTrue(Main.IsRed("4 red"));
-        Assertions.assertTrue(Main.IsRed("20 red"));
+        Assertions.assertTrue(Main.IsRed(" 20 red"));
         Assertions.assertFalse(Main.IsRed("6 blue"));
     }
 
