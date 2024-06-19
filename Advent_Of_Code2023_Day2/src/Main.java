@@ -52,15 +52,19 @@ public class Main {
         int smallestAmountOfGreenCubes = 0;
         int smallestAmountOfBlueCubes = 0;
 
+        //for some reason, when one value is set, previously set values get set to zero. This is a bug and is the reason why this method is not returning proper results.
+
         for (String subSet : Sets){
-            if (smallestAmountOfRedCubes > amountOfRedCubes(subSet) || smallestAmountOfRedCubes == 0){
-                smallestAmountOfRedCubes = amountOfRedCubes(subSet);
-            }
-            if (smallestAmountOfGreenCubes > amountOfGreenCubes(subSet) || smallestAmountOfGreenCubes == 0){
-                smallestAmountOfGreenCubes = amountOfGreenCubes(subSet);
-            }
-            if (smallestAmountOfBlueCubes > amountOfBlueCubes(subSet) || smallestAmountOfBlueCubes == 0){
-                smallestAmountOfBlueCubes = amountOfBlueCubes(subSet);
+            for (String singleColorAndValue : splitAtCommasAndSpaces(subSet)) {
+                if (IsRed(singleColorAndValue) && smallestAmountOfRedCubes > amountOfRedCubes(singleColorAndValue) || smallestAmountOfRedCubes == 0) {
+                    smallestAmountOfRedCubes = amountOfRedCubes(singleColorAndValue);
+                }
+                if (IsGreen(singleColorAndValue) && smallestAmountOfGreenCubes > amountOfGreenCubes(singleColorAndValue) || smallestAmountOfGreenCubes == 0) {
+                    smallestAmountOfGreenCubes = amountOfGreenCubes(singleColorAndValue);
+                }
+                if (IsBlue(singleColorAndValue) && smallestAmountOfBlueCubes > amountOfBlueCubes(singleColorAndValue) || smallestAmountOfBlueCubes == 0) {
+                    smallestAmountOfBlueCubes = amountOfBlueCubes(singleColorAndValue);
+                }
             }
         }
 
@@ -89,49 +93,44 @@ public class Main {
 
     public static int amountOfRedCubes(String NumberAndColorFromASingleSubset){ //expects an array containing subsets of a game 
         if (IsRed(NumberAndColorFromASingleSubset)){
-            if (NumberAndColorFromASingleSubset.matches(" \\d+ red")) {
-                return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[1]); //the values follow one of these two schemes: "x red" or " x red". The if is catches the latter. The same is true for the following methods
-            }
             return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[0]);
             }
         return 0;
     }
     public static int amountOfGreenCubes(String NumberAndColorFromASingleSubset){
         if (IsGreen(NumberAndColorFromASingleSubset)){
-            if (NumberAndColorFromASingleSubset.matches(" \\d+ green")) {
-                return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[1]);
-            }
             return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[0]);
             }
         return 0;
     }
     public static int amountOfBlueCubes(String NumberAndColorFromASingleSubset){
         if (IsBlue(NumberAndColorFromASingleSubset)){
-            if (NumberAndColorFromASingleSubset.matches(" \\d+ blue")) {
-                return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[1]);
-            }
             return Integer.parseInt(NumberAndColorFromASingleSubset.split(" ")[0]);
             }
         return 0;
     }
 
     public static boolean IsRed(String NumberAndColorFromASingleSubset){
-        if (NumberAndColorFromASingleSubset.matches(" ?\\d+ red")){
+        if (NumberAndColorFromASingleSubset.matches("\\d+ red")){
             return true;
         }
         return false;
     }
     public static boolean IsGreen(String NumberAndColorFromASingleSubset){
-        if (NumberAndColorFromASingleSubset.matches(" ?\\d+ green")){
+        if (NumberAndColorFromASingleSubset.matches("\\d+ green")){
             return true;
         }
         return false;
     }
     public static boolean IsBlue(String NumberAndColorFromASingleSubset){
-        if (NumberAndColorFromASingleSubset.matches(" ?\\d+ blue")){
+        if (NumberAndColorFromASingleSubset.matches("\\d+ blue")){
             return true;
         }
         return false;
+    }
+
+    public static String[] splitAtCommasAndSpaces(String line){
+        return line.split(", ");
     }
 
     public static String[] splitAtSemicolons(String line){
