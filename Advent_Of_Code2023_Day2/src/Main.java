@@ -12,7 +12,7 @@ public class Main {
             Scanner scanner = new Scanner(input);
             for (int i = 0; i < input.length(); i++){ //foring through the input data
                 if (scanner.hasNextLine()) {
-                    out += finalFunctionForPartOne(scanner.nextLine()); //final function returns game's number if it was possible
+                    out += finalFunctionForPartTwo(scanner.nextLine()); //final function returns game's number if it was possible
                 }
             }
             System.out.println(out);
@@ -56,13 +56,13 @@ public class Main {
 
         for (String subSet : Sets){
             for (String singleColorAndValue : splitAtCommasAndSpaces(subSet)) {
-                if (IsRed(singleColorAndValue) && smallestAmountOfRedCubes > amountOfRedCubes(singleColorAndValue) || smallestAmountOfRedCubes == 0) {
+                if (IsRed(singleColorAndValue) && smallestAmountOfRedCubes < amountOfRedCubes(singleColorAndValue) || smallestAmountOfRedCubes == 0) {
                     smallestAmountOfRedCubes = amountOfRedCubes(singleColorAndValue);
                 }
-                if (IsGreen(singleColorAndValue) && smallestAmountOfGreenCubes > amountOfGreenCubes(singleColorAndValue) || smallestAmountOfGreenCubes == 0) {
+                if (IsGreen(singleColorAndValue) && smallestAmountOfGreenCubes < amountOfGreenCubes(singleColorAndValue) || smallestAmountOfGreenCubes == 0) {
                     smallestAmountOfGreenCubes = amountOfGreenCubes(singleColorAndValue);
                 }
-                if (IsBlue(singleColorAndValue) && smallestAmountOfBlueCubes > amountOfBlueCubes(singleColorAndValue) || smallestAmountOfBlueCubes == 0) {
+                if (IsBlue(singleColorAndValue) && smallestAmountOfBlueCubes < amountOfBlueCubes(singleColorAndValue) || smallestAmountOfBlueCubes == 0) {
                     smallestAmountOfBlueCubes = amountOfBlueCubes(singleColorAndValue);
                 }
             }
