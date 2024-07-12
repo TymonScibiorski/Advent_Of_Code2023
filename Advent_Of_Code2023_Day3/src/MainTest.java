@@ -8,6 +8,13 @@ public class MainTest {
 //    }
 
     @Test
+    public void TestSumAllNumbersInAnArray(){
+        Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{99, 1}), 100);
+        Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{467, 35, 633, 617, 592, 755, 664, 598}), 4361);
+        
+    }
+
+    @Test
     public void TestingIsASymbol(){
         Assert.assertFalse(Main.IsASymbol("1"));
         Assert.assertFalse(Main.IsASymbol("2"));

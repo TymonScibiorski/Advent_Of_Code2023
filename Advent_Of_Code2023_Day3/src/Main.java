@@ -3,6 +3,21 @@ public class Main {
 
     }
 
+    public static int SumAllNumbersInAnArray(int[] ArrayWithNumbers){
+        // This method takes in an array containing ints and returns the sum of it.
+        // This method will be used in the final function, for summing all of the valid numbers in the input text.
+        // The sum could be calculated in the loop determining if a number is valid,
+        // but contracting two methods into one would reduce the readability and wouldn't change the BigO of the algorithm
+
+        int sum = 0;
+
+        for(int i = 0; i<ArrayWithNumbers.length; i++){
+            sum += ArrayWithNumbers[i];
+        }
+
+        return sum;
+    }
+
     public static boolean IsASymbol(String character){
         if (character.length()!=1){
             return false;
@@ -22,6 +37,12 @@ public class Main {
 
         return false;
     }
+
+
+
+//    public static int ExtractNumber(String str){
+//        //takes in a
+//    }
 
     public static String CharToStr(char character){
         return String.valueOf(character);
