@@ -1,7 +1,27 @@
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
     }
+
+    public static int FinalFunctionForPartOne(){
+
+        return SumAllNumbersInAnArray(ArrayOfValidNumbers);
+    }
+
+    public static List<String> StringWithSymbolsDotsAndNumbersToStrArray(String line){
+        char[] ChoppedUpLine = line.toCharArray();
+        List out = new List<>;
+
+        for (int i = 0; i < ChoppedUpLine.length; i++) {
+            if (IsANumber(ChoppedUpLine[i]) == false){
+                out.add(String.valueOf(ChoppedUpLine[i]));
+            }
+        }
+
+    }
+
 
     public static int SumAllNumbersInAnArray(int[] ArrayWithNumbers){
         // This method takes in an array containing ints and returns the sum of it.
@@ -51,6 +71,13 @@ public class Main {
     public static boolean IsANumber(String str){
         //Takes in a String and determines if it's a number
         if(str.matches("\\d+")){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean IsANumber(char ch){
+        if(String.valueOf(ch).matches("\\d")){
             return true;
         }
         return false;
