@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -10,16 +11,26 @@ public class Main {
         return SumAllNumbersInAnArray(ArrayOfValidNumbers);
     }
 
-    public static List<String> StringWithSymbolsDotsAndNumbersToStrArray(String line){
+    public static ArrayList<String> StringWithSymbolsDotsAndNumbersToStrArray(String line){
         char[] ChoppedUpLine = line.toCharArray();
-        List out = new List<>;
+        ArrayList<String> out = new ArrayList<String>();
 
         for (int i = 0; i < ChoppedUpLine.length; i++) {
             if (IsANumber(ChoppedUpLine[i]) == false){
                 out.add(String.valueOf(ChoppedUpLine[i]));
             }
+
+            if (IsANumber(ChoppedUpLine[i]) == true){
+                int j = 0;
+
+
+
+                i += j;
+                out.add(String.valueOf(ChoppedUpLine[i]));
+            }
         }
 
+        return out;
     }
 
 

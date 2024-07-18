@@ -1,11 +1,25 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class MainTest {
 
 //    @Test
 //    void TestMain() {
 //    }
+
+    @Test
+    public void TestStringWithSymbolsDotsAndNumbersToStrArray(){
+        String line = "467..114..";
+        boolean Assertion = false;
+        ArrayList<String> VettedLine = Main.StringWithSymbolsDotsAndNumbersToStrArray(line);
+        if(VettedLine.get(0).equals("467") && (VettedLine.get(1).equals("."))) && VettedLine.get(2).equals(".")) && VettedLine.get(3).equals("114")) && VettedLine.get(4).equals(".")) && VettedLine.get(5).equals("."))){}
+
+        Assert.assertTrue(Assertion);
+
+//        Assert.assertTrue(new ArrayList<String>(""));
+    }
 
     @Test
     public void TestSumAllNumbersInAnArray(){
