@@ -14,7 +14,13 @@ public class MainTest {
         String line = "467..114..";
         boolean Assertion = false;
         ArrayList<String> VettedLine = Main.StringWithSymbolsDotsAndNumbersToStrArray(line);
-        if(VettedLine.get(0).equals("467") && (VettedLine.get(1).equals("."))) && VettedLine.get(2).equals(".")) && VettedLine.get(3).equals("114")) && VettedLine.get(4).equals(".")) && VettedLine.get(5).equals("."))){}
+        boolean bool0 = VettedLine.get(0).equals("467");
+        boolean bool1 = VettedLine.get(1).equals(".") && VettedLine.get(2).equals(".") && VettedLine.get(4).equals(".") && VettedLine.get(5).equals(".");
+        boolean bool2 = VettedLine.get(3).equals("467");
+
+        if(bool0 && bool1 && bool2){
+            Assertion = true;
+        }
 
         Assert.assertTrue(Assertion);
 
