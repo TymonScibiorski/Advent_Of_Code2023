@@ -1,19 +1,18 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
     }
 
-    public static int FinalFunctionForPartOne(){
+//    public static int FinalFunctionForPartOne(){
+//
+//        return SumAllNumbersInAnArray(ArrayOfValidNumbers);
+//    }
 
-        return SumAllNumbersInAnArray(ArrayOfValidNumbers);
-    }
-
-    public static ArrayList<String> StringWithSymbolsDotsAndNumbersToStrArray(String line){
+    public static String[] StringWithSymbolsDotsAndNumbersToStrArray(String line){
         char[] ChoppedUpLine = line.toCharArray();
-        ArrayList<String> out = new ArrayList<String>();
+        ArrayList<String> out = new ArrayList<>();
 
         for (int i = 0; i < ChoppedUpLine.length; i++) {
             if (IsANumber(ChoppedUpLine[i]) == false){
@@ -21,18 +20,27 @@ public class Main {
             }
 
             if (IsANumber(ChoppedUpLine[i]) == true){
-                int j = 0;
+                StringBuilder Number = new StringBuilder();
 
+                while(IsANumber(ChoppedUpLine[i])){
+                    Number.append(ChoppedUpLine[i]);
+                    i++;
+                }
 
-
-                i += j;
-                out.add(String.valueOf(ChoppedUpLine[i]));
+                out.add(String.valueOf(Number));
             }
         }
 
-        return out;
+        return ConvertArrayListStringToStringArray(out);
     }
 
+    public static String[] ConvertArrayListStringToStringArray(ArrayList<String> givenArrayList){
+        String[] out = new String[givenArrayList.size()];
+        for (int i = 0; i < givenArrayList.size(); i++) {
+            out[i] = givenArrayList.get(i);
+        }
+        return out;
+    }
 
     public static int SumAllNumbersInAnArray(int[] ArrayWithNumbers){
         // This method takes in an array containing ints and returns the sum of it.

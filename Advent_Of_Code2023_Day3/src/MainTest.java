@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainTest {
 
@@ -11,12 +12,12 @@ public class MainTest {
 
     @Test
     public void TestStringWithSymbolsDotsAndNumbersToStrArray(){
-        String line = "467..114..";
+        String line = "467..114...";
         boolean Assertion = false;
-        ArrayList<String> VettedLine = Main.StringWithSymbolsDotsAndNumbersToStrArray(line);
-        boolean bool0 = VettedLine.get(0).equals("467");
-        boolean bool1 = VettedLine.get(1).equals(".") && VettedLine.get(2).equals(".") && VettedLine.get(4).equals(".") && VettedLine.get(5).equals(".");
-        boolean bool2 = VettedLine.get(3).equals("467");
+        String[] VettedLine = Main.StringWithSymbolsDotsAndNumbersToStrArray(line);
+        boolean bool0 = VettedLine[0].equals("467");
+        boolean bool1 = VettedLine[1].equals(".") && VettedLine[2].equals(".") && VettedLine[4].equals(".") && VettedLine[5].equals(".") && VettedLine[6].equals(".");
+        boolean bool2 = VettedLine[3].equals("467");
 
         if(bool0 && bool1 && bool2){
             Assertion = true;
@@ -25,6 +26,17 @@ public class MainTest {
         Assert.assertTrue(Assertion);
 
 //        Assert.assertTrue(new ArrayList<String>(""));
+    }
+
+    @Test
+    public void TestConvertArrayListStringToStringArray(){
+        ArrayList<String> arrayList0 = new ArrayList<>(Arrays.asList("dupa"));
+        String[] stringArray0 = new String[]{"dupa"};
+        Assert.assertEquals(stringArray0, Main.ConvertArrayListStringToStringArray(arrayList0));
+
+        ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList("467", ".", ".", "114", ".", "."));
+        String[] stringArray1 = new String[]{"467", ".", ".", "114", ".", "."};
+        Assert.assertEquals(stringArray1, Main.ConvertArrayListStringToStringArray(arrayList1));
     }
 
     @Test
