@@ -11,12 +11,18 @@ public class Main {
 //    }
 
     public static String[] StringWithSymbolsDotsAndNumbersToStrArray(String line){
+        // This method takes a line and returns an array that will be usable by the code.
+        // Examples:
+        // "...." -> [".", ".", ".", "."]
+        // "..46.." -> [".", ".", "46", ".", "."]
+
         char[] ChoppedUpLine = line.toCharArray();
         ArrayList<String> out = new ArrayList<>();
 
         for (int i = 0; i < ChoppedUpLine.length; i++) {
             if (IsANumber(ChoppedUpLine[i]) == false){
                 out.add(String.valueOf(ChoppedUpLine[i]));
+                continue;
             }
 
             if (IsANumber(ChoppedUpLine[i]) == true){
@@ -28,6 +34,7 @@ public class Main {
                 }
 
                 out.add(String.valueOf(Number));
+                i--;
             }
         }
 

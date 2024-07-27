@@ -12,20 +12,16 @@ public class MainTest {
 
     @Test
     public void TestStringWithSymbolsDotsAndNumbersToStrArray(){
-        String line = "467..114...";
-        boolean Assertion = false;
-        String[] VettedLine = Main.StringWithSymbolsDotsAndNumbersToStrArray(line);
-        boolean bool0 = VettedLine[0].equals("467");
-        boolean bool1 = VettedLine[1].equals(".") && VettedLine[2].equals(".") && VettedLine[4].equals(".") && VettedLine[5].equals(".") && VettedLine[6].equals(".");
-        boolean bool2 = VettedLine[3].equals("467");
+        Assert.assertEquals(new String[]{"467", ".", ".", "114", ".", ".", "."},
+                Main.StringWithSymbolsDotsAndNumbersToStrArray("467..114..."));
 
-        if(bool0 && bool1 && bool2){
-            Assertion = true;
-        }
+        Assert.assertEquals(new String[]{".", ".", ".", "."},
+                Main.StringWithSymbolsDotsAndNumbersToStrArray("...."));
 
-        Assert.assertTrue(Assertion);
+        Assert.assertEquals(new String[]{".", ".", "46", ".", "."},
+                Main.StringWithSymbolsDotsAndNumbersToStrArray("..46.."));
 
-//        Assert.assertTrue(new ArrayList<String>(""));
+        
     }
 
     @Test
