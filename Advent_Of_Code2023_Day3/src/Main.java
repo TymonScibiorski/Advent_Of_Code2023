@@ -10,6 +10,24 @@ public class Main {
 //        return SumAllNumbersInAnArray(ArrayOfValidNumbers);
 //    }
 
+    public static boolean IsAPartNumber(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
+        boolean out = false;
+        int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
+
+        while (out == false){
+            for (int i = NumbersPlaceInLine; i < NumbersLength+NumbersPlaceInLine; i++) {
+                if(IsASymbol(
+                        matrix[NumbersLine][i]
+                )){
+                    out = true;
+                    break;
+                }
+            }
+        }
+
+        return out;
+    }
+
     public static String[] StringWithSymbolsDotsAndNumbersToStrArray(String line){
         // This method takes a line and returns an array that will be usable by the code.
         // Examples:
@@ -43,6 +61,7 @@ public class Main {
 
     public static String[] ConvertArrayListStringToStringArray(ArrayList<String> givenArrayList){
         String[] out = new String[givenArrayList.size()];
+
         for (int i = 0; i < givenArrayList.size(); i++) {
             out[i] = givenArrayList.get(i);
         }
