@@ -11,21 +11,37 @@ public class Main {
 //    }
 
     public static boolean IsAPartNumber(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
-        boolean out = false;
+        // This method determines if a given number is a partNumber,
+        // by checking if it is adjacent to a symbol with the IsASymbol method.
+        // As input, it takes the matrix and the number's coordinates.
+
         int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
 
-        while (out == false){
-            for (int i = NumbersPlaceInLine; i < NumbersLength+NumbersPlaceInLine; i++) {
-                if(IsASymbol(
-                        matrix[NumbersLine][i]
-                )){
-                    out = true;
-                    break;
-                }
+        // Checking the line above the number
+        for (int i = NumbersPlaceInLine; i < NumbersLength+NumbersPlaceInLine; i++) {
+            if(IsASymbol(
+                    matrix[NumbersLine-1][i]
+            )){
+               return true;
             }
         }
 
-        return out;
+        // Checking the line of the number
+        if (NumbersPlaceInLine-1 < matrix[NumbersLine].length){
+            // If the number has something before it, it gets checked.
+            if(IsASymbol(matrix[NumbersLine][NumbersPlaceInLine-1])){
+                return true;
+            }
+        }
+        if (NumbersLength+NumbersPlaceInLine < matrix[NumbersLine].length) {
+            // If the number has something after it, it gets checked.
+            if (IsASymbol(matrix[NumbersLine][NumbersPlaceInLine + NumbersLength])){
+                return true;
+            }
+        }
+
+
+        return false;
     }
 
     public static String[] StringWithSymbolsDotsAndNumbersToStrArray(String line){
@@ -83,19 +99,19 @@ public class Main {
         return sum;
     }
 
-    public static boolean IsASymbol(String character){
-        if (character.length()!=1){
+    public static boolean IsASymbol(String str){
+        if (str.length()!=1){
             return false;
         }
-        if(character.matches("\\d+")){
+        if(str.matches("\\d+")){
             return false;
         }
-        if(character.matches("^.")){
+        if(str.matches("^.")){
             return false;
         }
         //Symbols can't be digits, dots or longer than one.
 
-        if(character.matches("[@#\\$%&*\\-\\+=]")){
+        if(str.matches("[@#\\$%&*\\-\\+=]")){
             return true;
         }
         //Symbols are any of the following: @#$%&*-+=

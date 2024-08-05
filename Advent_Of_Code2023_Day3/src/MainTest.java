@@ -11,6 +11,38 @@ public class MainTest {
 //    }
 
     @Test
+    public void TestIsAPartNumber(){
+        String[][] matrix = {
+                {".", ".", "."},
+                {".", "1", "."},
+                {".", ".", "."}
+        };
+        Assert.assertFalse(
+                Main.IsAPartNumber(matrix, 1, 1)
+        );
+
+        String[][] matrix1 = {
+                {".", ".", "."},
+                {"1", ".", "."},
+                {".", ".", "."}
+        };
+        Assert.assertFalse(
+                Main.IsAPartNumber(matrix1, 1, 0)
+        );
+
+        String[][] matrix2 = {
+                {"$", "#", "@"},
+                {"*", "1", "%"},
+                {"-", "=", "+"}
+        };
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix2, 1, 1)
+        );
+
+
+    }
+
+    @Test
     public void TestStringWithSymbolsDotsAndNumbersToStrArray(){
         Assert.assertEquals(new String[]{"467", ".", ".", "114", ".", ".", "."},
                 Main.StringWithSymbolsDotsAndNumbersToStrArray("467..114..."));
