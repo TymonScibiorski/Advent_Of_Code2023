@@ -17,26 +17,55 @@ public class Main {
 
         int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
 
-        // Checking the line above the number
-        for (int i = NumbersPlaceInLine; i < NumbersLength+NumbersPlaceInLine; i++) {
-            if(IsASymbol(
-                    matrix[NumbersLine-1][i]
-            )){
-               return true;
+        // Checking the line above the number, if it exists (if the number's line isn't the first one).
+        if(NumbersLine != 0) {
+            int OneIfNumberOnTheLeftEdge = 0;
+            int OneIfNumberOnTheRightEdge = 0;
+            if(NumbersPlaceInLine == 0){
+                OneIfNumberOnTheLeftEdge = 1;
             }
+            if (NumbersLength + NumbersPlaceInLine < matrix[NumbersLine - 1].length){
+                OneIfNumberOnTheRightEdge = 1;
+            }
+
+                for (int i = NumbersPlaceInLine + OneIfNumberOnTheLeftEdge; i < NumbersLength + NumbersPlaceInLine + OneIfNumberOnTheRightEdge; i++) {
+                    if (IsASymbol(
+                            matrix[NumbersLine - 1][i]
+                    )) {
+                        return true;
+                    }
+                }
         }
 
-        // Checking the line of the number
-        if (NumbersPlaceInLine-1 < matrix[NumbersLine].length){
-            // If the number has something before it, it gets checked.
+        // Checking the line of the number, if the number isn't on the edge of the matrix.
+        if (NumbersPlaceInLine != 0){ // Checking if the number isn't on the left edge.
             if(IsASymbol(matrix[NumbersLine][NumbersPlaceInLine-1])){
                 return true;
             }
         }
-        if (NumbersLength+NumbersPlaceInLine < matrix[NumbersLine].length) {
-            // If the number has something after it, it gets checked.
+        if (NumbersLength+NumbersPlaceInLine < matrix[NumbersLine].length) { // Checking if the number isn't on the right edge.
             if (IsASymbol(matrix[NumbersLine][NumbersPlaceInLine + NumbersLength])){
                 return true;
+            }
+        }
+
+        // Checking the line after the number, if number's line isn't the last one in the matrix
+        if(NumbersLine+1 < matrix.length) {
+            int OneIfNumberOnTheLeftEdge = 0;
+            int OneIfNumberOnTheRightEdge = 0;
+            if(NumbersPlaceInLine == 0){
+                OneIfNumberOnTheLeftEdge = 1;
+            }
+            if (NumbersLength + NumbersPlaceInLine < matrix[NumbersLine + 1].length){
+                OneIfNumberOnTheRightEdge = 1;
+            }
+
+            for (int i = NumbersPlaceInLine + OneIfNumberOnTheLeftEdge; i < NumbersLength + NumbersPlaceInLine + OneIfNumberOnTheRightEdge; i++) {
+                if (IsASymbol(
+                        matrix[NumbersLine + 1][i]
+                )) {
+                    return true;
+                }
             }
         }
 
