@@ -74,7 +74,7 @@ public class MainTest {
     }
 
     @Test
-    public void TestingIsASymbol(){
+    public void TestIsASymbol(){
         Assert.assertFalse(Main.IsASymbol("1"));
         Assert.assertFalse(Main.IsASymbol("2"));
         Assert.assertFalse(Main.IsASymbol("3"));
@@ -103,7 +103,7 @@ public class MainTest {
     }
 
     @Test
-    public void TestingIsANumber(){
+    public void TestIsANumber(){
         Assert.assertTrue(Main.IsANumber("0"));
         Assert.assertTrue(Main.IsANumber("1"));
         Assert.assertTrue(Main.IsANumber("2"));
@@ -125,5 +125,53 @@ public class MainTest {
         Assert.assertFalse(Main.IsANumber("99-98"));
         Assert.assertFalse(Main.IsANumber("dsfasdfas 45546456 sadfasdfadsfgas"));
         Assert.assertFalse(Main.IsANumber("[]"));
+    }
+
+    @Test
+    public void TestIsOnTheRightEdgeOfTheMatrix(){
+        String[][] matrix = {
+                {".", ".", "."},
+                {".", "1", "."},
+                {".", ".", "."}
+        };
+        Assert.assertFalse(Main.IsOnTheRightEdgeOfTheMatrix(matrix, 1, 1));
+
+        String[][] matrix1 = {
+                {".", ".", "."},
+                {"1", ".", "."},
+                {".", ".", "."}
+        };
+        Assert.assertFalse(Main.IsOnTheRightEdgeOfTheMatrix(matrix1, 0, 1));
+
+        String[][] matrix2 = {
+                {"$", "#", "@"},
+                {"*", "%", "34"},
+                {"-", "=", "+"}
+        };
+        Assert.assertTrue(Main.IsOnTheRightEdgeOfTheMatrix(matrix2, 1, 2));
+    }
+
+    @Test
+    public void TestIsOnTheLeftEdgeOfTheMatrix(){
+        String[][] matrix = {
+                {".", ".", "."},
+                {".", "1", "."},
+                {".", ".", "."}
+        };
+        Assert.assertFalse(Main.IsOnTheLeftEdgeOfTheMatrix(1));
+
+        String[][] matrix1 = {
+                {".", ".", "."},
+                {"1", ".", "."},
+                {".", ".", "."}
+        };
+        Assert.assertTrue(Main.IsOnTheLeftEdgeOfTheMatrix(0));
+
+        String[][] matrix2 = {
+                {"$", "#", "@"},
+                {"*", "%", "34"},
+                {"-", "=", "+"}
+        };
+        Assert.assertFalse(Main.IsOnTheLeftEdgeOfTheMatrix(2));
     }
 }

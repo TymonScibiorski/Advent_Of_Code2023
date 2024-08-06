@@ -21,10 +21,10 @@ public class Main {
         if(NumbersLine != 0) {
             int OneIfNumberOnTheLeftEdge = 0;
             int OneIfNumberOnTheRightEdge = 0;
-            if(NumbersPlaceInLine == 0){
+            if(IsOnTheLeftEdgeOfTheMatrix(NumbersPlaceInLine)){
                 OneIfNumberOnTheLeftEdge = 1;
             }
-            if (NumbersLength + NumbersPlaceInLine < matrix[NumbersLine - 1].length){
+            if (IsOnTheRightEdgeOfTheMatrix(matrix, NumbersLine, NumbersPlaceInLine)){
                 OneIfNumberOnTheRightEdge = 1;
             }
 
@@ -168,6 +168,20 @@ public class Main {
 
     public static boolean IsANumber(char ch){
         if(String.valueOf(ch).matches("\\d")){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean IsOnTheRightEdgeOfTheMatrix(String[][] matrix, int LineNumber, int placeInLine){
+        if(placeInLine+1 == matrix[LineNumber].length){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean IsOnTheLeftEdgeOfTheMatrix(int placeInLine){
+        if(placeInLine == 0){
             return true;
         }
         return false;
