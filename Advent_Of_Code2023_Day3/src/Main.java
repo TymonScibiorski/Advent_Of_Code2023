@@ -110,6 +110,8 @@ public class Main {
     }
 
     public static String[] ConvertArrayListStringToStringArray(ArrayList<String> givenArrayList){
+        // ArrayList {".", "34", "5"} -> String[] {".", "34", "5"}
+
         String[] out = new String[givenArrayList.size()];
 
         for (int i = 0; i < givenArrayList.size(); i++) {
@@ -119,10 +121,10 @@ public class Main {
     }
 
     public static int SumAllNumbersInAnArray(int[] ArrayWithNumbers){
-        // This method takes in an array containing ints and returns the sum of it.
-        // This method will be used in the final function, for summing all of the valid numbers in the input text.
-        // The sum could be calculated in the loop determining if a number is valid,
-        // but contracting two methods into one would reduce the readability and wouldn't change the BigO of the algorithm
+        // This method takes in an array containing ints and returns the sum of them,
+        // it will be used in the final function, for summing all of the valid numbers in the input text.
+        // Example:
+        // int[] {1, 2, 3, 4, 5} -> 15
 
         int sum = 0;
 
@@ -143,7 +145,7 @@ public class Main {
         if(str.matches("\\d+")){
             return false;
         }
-        //Symbols can't be digits, dots or longer than one.
+        //Symbols can't be dots, longer than one or digits.
 
         if(str.matches("[@#\\$%&*\\-\\+=]")){
             return true;
@@ -164,7 +166,7 @@ public class Main {
     }
 
     public static boolean IsANumber(String str){
-        //Takes in a String and determines if it's a number
+        // Takes in a String and determines if it's a written number.
         if(str.matches("\\d+")){
             return true;
         }
@@ -172,6 +174,7 @@ public class Main {
     }
 
     public static boolean IsANumber(char ch){
+        // Takes in a char and determines if it's a written number.
         if(String.valueOf(ch).matches("\\d")){
             return true;
         }
@@ -179,6 +182,15 @@ public class Main {
     }
 
     public static boolean IsOnTheRightEdgeOfTheMatrix(String[][] matrix, int LineNumber, int placeInLine){
+        // Determines if a specific item is on the end of a line in a matrix.
+        // matrix = {
+        //      {"$", "#", "@"},
+        //      {"*", "%", "1"},
+        //      {"-", "=", "+"}
+        //        };
+        // If supplied with this matrix and the coordinates of either "@", "1" or "+" the method would return True,
+        // and False for any of the following: "$", "#", "*", "%", "-", "="
+
         if(placeInLine+1 == matrix[LineNumber].length){
             return true;
         }
@@ -186,6 +198,15 @@ public class Main {
     }
 
     public static boolean IsOnTheLeftEdgeOfTheMatrix(int placeInLine){
+        // Determines if a specific item is on the end of a line in a matrix.
+        // matrix = {
+        //      {"$", "#", "@"},
+        //      {"*", "%", "1"},
+        //      {"-", "=", "+"}
+        //        };
+        // If supplied the x coordinate of either "$", "*" or "-" the method would return True,
+        // and False for any of the following: "#", "@", "%", "1", "=", "+"
+
         if(placeInLine == 0){
             return true;
         }
