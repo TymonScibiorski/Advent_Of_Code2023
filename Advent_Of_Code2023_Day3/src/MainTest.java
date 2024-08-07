@@ -20,7 +20,6 @@ public class MainTest {
         Assert.assertFalse(
                 Main.IsAPartNumber(matrix, 1, 1)
         );
-
         String[][] matrix1 = {
                 {".", ".", "."},
                 {"1", ".", "."},
@@ -37,6 +36,14 @@ public class MainTest {
         };
         Assert.assertTrue(
                 Main.IsAPartNumber(matrix2, 1, 1)
+        );
+        String[][] matrix3 = {
+                {"$", "#", "@"},
+                {"*", "%", "1"},
+                {"-", "=", "+"}
+        };
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix3, 1, 2)
         );
 
 

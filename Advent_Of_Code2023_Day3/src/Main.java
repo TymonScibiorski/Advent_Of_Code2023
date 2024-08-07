@@ -17,6 +17,11 @@ public class Main {
 
         int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
 
+        if(!matrix[NumbersLine][NumbersPlaceInLine].matches("\\d+")){
+            return false;
+            // A partNumber must be a number.
+        }
+
         // Checking the line above the number, if it exists (if the number's line isn't the first one).
         if(NumbersLine != 0) {
             int OneIfNumberOnTheLeftEdge = 0;
@@ -129,13 +134,13 @@ public class Main {
     }
 
     public static boolean IsASymbol(String str){
+        if(str.equals(".")){
+            return false;
+        }
         if (str.length()!=1){
             return false;
         }
         if(str.matches("\\d+")){
-            return false;
-        }
-        if(str.matches("^.")){
             return false;
         }
         //Symbols can't be digits, dots or longer than one.
