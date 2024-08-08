@@ -61,11 +61,18 @@ public class MainTest {
                 Main.IsAPartNumber(matrix3, 1, 2)
         );
 
+        String[][] matrix4 = {
+                {".", "423", "."},
+                {".", ".", ".", ".", "."}
+        };
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix4, 0, 1)
+        );
 
     }
 
     @Test
-    public void TestRawInputLineToStrArrayy(){
+    public void TestRawInputLineToStrArray(){
         Assert.assertEquals(new String[]{"467", ".", ".", "114", ".", ".", "."},
                 Main.RawInputLineToStrArray("467..114..."));
 

@@ -6,20 +6,34 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        String[][] matrix = filledMatrix();
-        for (int i = 0; i < matrix.length+1; i++) {
-            System.out.println(matrix[i]);
-        }
+        System.out.println(FinalFunctionForPartOne());
     }
-    // The whole input has to be loaded into a matrix, then the IsAPartNumber has to be run on the matrix and vali
-    // TODO: RawInputLineToStrArray isn't working properly. In the number section of the code, i goes out of bounds.
+    // TODO: The IsAPartNumber method is not functioning properly, indexes can go out of bounds for the above and below line of the checked number.
+
+        public static int FinalFunctionForPartOne(){
+        String[][] matrix = filledMatrix();
+        ArrayList <Integer> ArrayOfValidNumbers = new ArrayList<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if(IsAPartNumber(matrix, i, j)){
+                    ArrayOfValidNumbers.add(Integer.valueOf(matrix[i][j]));
+                }
+            }
+        }
+
+        return SumAllNumbersInAnArray(ConvertArrayListIntegerToIntArray(ArrayOfValidNumbers));
+    }
 
     public static String[][] createMatrix(){
+        // The input has 140 lines.
         String[][] matrix = new String[140][];
         return matrix;
     }
 
     public static String[][] filledMatrix(){
+        // This method creates a matrix, that contains 140 empty String[], using the createMatrix method
+        // and fills it with ready-to-use lines from the input, vetted with the RawInputLineToStrArray method.
         String[][] matrix = createMatrix();
 
         try {
@@ -39,14 +53,6 @@ public class Main {
         return matrix;
     }
 
-//    public static int FinalFunctionForPartOne(String line){
-//        String[][] matrix = filledMatrix();
-//        for (int i = 0; i < ; i++) {
-//
-//        }
-//
-//        return SumAllNumbersInAnArray(ArrayOfValidNumbers);
-//    }
 
     public static boolean IsAPartNumber(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
         // This method determines if a given number is a partNumber,
@@ -80,13 +86,13 @@ public class Main {
                 }
         }
 
-        // Checking the line of the number, if the number isn't on the edge of the matrix.
-        if (NumbersPlaceInLine != 0){ // Checking if the number isn't on the left edge.
+        // Checking the line of the number, if the number isn't on an edge of the matrix.
+        if (IsOnTheLeftEdgeOfTheMatrix(NumbersLine)){ // Checking if the number isn't on the left edge.
             if(IsASymbol(matrix[NumbersLine][NumbersPlaceInLine-1])){
                 return true;
             }
         }
-        if (NumbersLength+NumbersPlaceInLine < matrix[NumbersLine].length) { // Checking if the number isn't on the right edge.
+        if (IsOnTheRightEdgeOfTheMatrix(matrix, NumbersLine, NumbersPlaceInLine)) { // Checking if the number isn't on the right edge.
             if (IsASymbol(matrix[NumbersLine][NumbersPlaceInLine + NumbersLength])){
                 return true;
             }
@@ -112,7 +118,6 @@ public class Main {
             }
         }
 
-
         return false;
     }
 
@@ -137,7 +142,7 @@ public class Main {
                 StringBuilder Number = new StringBuilder();
                 Number.append(ChoppedUpLine[i]);
 
-                while(i + 1 != ChoppedUpLine.length && IsANumber(ChoppedUpLine[i+1])){
+                while(i + 1 < ChoppedUpLine.length && IsANumber(ChoppedUpLine[i+1])){
                     i++;
                     Number.append(ChoppedUpLine[i]);
                 }
@@ -152,6 +157,17 @@ public class Main {
         // ArrayList {".", "34", "5"} -> String[] {".", "34", "5"}
 
         String[] out = new String[givenArrayList.size()];
+
+        for (int i = 0; i < givenArrayList.size(); i++) {
+            out[i] = givenArrayList.get(i);
+        }
+        return out;
+    }
+
+    public static int[] ConvertArrayListIntegerToIntArray(ArrayList<Integer> givenArrayList){
+        // ArrayList {1, 2, 3} -> int[] {1, 2, 3}
+
+        int[] out = new int[givenArrayList.size()];
 
         for (int i = 0; i < givenArrayList.size(); i++) {
             out[i] = givenArrayList.get(i);
