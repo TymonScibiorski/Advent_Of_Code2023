@@ -1,11 +1,50 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+        String[][] matrix = filledMatrix();
+        for (int i = 0; i < matrix.length+1; i++) {
+        System.out.println(matrix[i]);
+        }
+    }
+    // The whole input has to be loaded into a matrix, then the IsAPartNumber has to be run on the matrix and vali
+    // TODO: StringWithSymbolsDotsAndNumbersToStrArray isn't working properly. In the number section of the code, i goes out of bounds.
+
+    public static String[][] createMatrix(){
+        String[][] matrix = new String[140][];
+        return matrix;
     }
 
-//    public static int FinalFunctionForPartOne(){
+    public static String[][] filledMatrix(){
+        String[][] matrix = createMatrix();
+
+        try {
+            File input = new File("src/input.txt");
+            Scanner scanner = new Scanner(input);
+
+            for (int i = 0; i < input.length(); i++){
+                if (scanner.hasNextLine()) {
+                    String[] line = StringWithSymbolsDotsAndNumbersToStrArray(scanner.nextLine());
+                    matrix[i] = line;
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return matrix;
+    }
+
+//    public static int FinalFunctionForPartOne(String line){
+//        String[][] matrix = filledMatrix();
+//        for (int i = 0; i < ; i++) {
+//
+//        }
 //
 //        return SumAllNumbersInAnArray(ArrayOfValidNumbers);
 //    }
@@ -17,7 +56,7 @@ public class Main {
 
         int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
 
-        if(!matrix[NumbersLine][NumbersPlaceInLine].matches("\\d+")){
+        if(!IsANumber(matrix[NumbersLine][NumbersPlaceInLine])){
             return false;
             // A partNumber must be a number.
         }
@@ -88,6 +127,8 @@ public class Main {
         ArrayList<String> out = new ArrayList<>();
 
         for (int i = 0; i < ChoppedUpLine.length; i++) {
+            // If it's not a number, it takes up one space only.
+            // If it is a number, it can take up more than one space, therefore next items must be checked as well
             if (IsANumber(ChoppedUpLine[i]) == false){
                 out.add(String.valueOf(ChoppedUpLine[i]));
                 continue;
@@ -156,11 +197,6 @@ public class Main {
     }
 
 
-
-//    public static int ExtractNumber(String str){
-//        //takes in a
-//    }
-
     public static String CharToStr(char character){
         return String.valueOf(character);
     }
@@ -182,7 +218,7 @@ public class Main {
     }
 
     public static boolean IsOnTheRightEdgeOfTheMatrix(String[][] matrix, int LineNumber, int placeInLine){
-        // Determines if a specific item is on the end of a line in a matrix.
+        // Determines if a specific item is on the right end of a line in a matrix.
         // matrix = {
         //      {"$", "#", "@"},
         //      {"*", "%", "1"},
@@ -198,7 +234,7 @@ public class Main {
     }
 
     public static boolean IsOnTheLeftEdgeOfTheMatrix(int placeInLine){
-        // Determines if a specific item is on the end of a line in a matrix.
+        // Determines if a specific item is on the left end of a line in a matrix.
         // matrix = {
         //      {"$", "#", "@"},
         //      {"*", "%", "1"},

@@ -11,6 +11,21 @@ public class MainTest {
 //    }
 
     @Test
+    public void TestCreateMatrix(){
+        String[][] matrix = Main.createMatrix();
+        boolean isFilledWithNulls = true;
+
+        for (int i = 0; i < matrix.length; i++) {
+            if(matrix[i] != null){
+                isFilledWithNulls = false;
+            }
+        }
+
+        Assert.assertEquals(matrix.length, 140);
+        Assert.assertTrue(isFilledWithNulls);
+    }
+
+    @Test
     public void TestIsAPartNumber(){
         String[][] matrix = {
                 {".", ".", "."},
