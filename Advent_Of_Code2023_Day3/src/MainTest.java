@@ -65,17 +65,18 @@ public class MainTest {
     }
 
     @Test
-    public void TestStringWithSymbolsDotsAndNumbersToStrArray(){
+    public void TestRawInputLineToStrArrayy(){
         Assert.assertEquals(new String[]{"467", ".", ".", "114", ".", ".", "."},
-                Main.StringWithSymbolsDotsAndNumbersToStrArray("467..114..."));
+                Main.RawInputLineToStrArray("467..114..."));
 
         Assert.assertEquals(new String[]{".", ".", ".", "."},
-                Main.StringWithSymbolsDotsAndNumbersToStrArray("...."));
+                Main.RawInputLineToStrArray("...."));
 
         Assert.assertEquals(new String[]{".", ".", "46", ".", "."},
-                Main.StringWithSymbolsDotsAndNumbersToStrArray("..46.."));
+                Main.RawInputLineToStrArray("..46.."));
 
-
+        Assert.assertEquals(new String[]{".", ".", "731"},
+                Main.RawInputLineToStrArray("..731"));
     }
 
     @Test

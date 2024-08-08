@@ -8,11 +8,11 @@ public class Main {
 
         String[][] matrix = filledMatrix();
         for (int i = 0; i < matrix.length+1; i++) {
-        System.out.println(matrix[i]);
+            System.out.println(matrix[i]);
         }
     }
     // The whole input has to be loaded into a matrix, then the IsAPartNumber has to be run on the matrix and vali
-    // TODO: StringWithSymbolsDotsAndNumbersToStrArray isn't working properly. In the number section of the code, i goes out of bounds.
+    // TODO: RawInputLineToStrArray isn't working properly. In the number section of the code, i goes out of bounds.
 
     public static String[][] createMatrix(){
         String[][] matrix = new String[140][];
@@ -28,8 +28,7 @@ public class Main {
 
             for (int i = 0; i < input.length(); i++){
                 if (scanner.hasNextLine()) {
-                    String[] line = StringWithSymbolsDotsAndNumbersToStrArray(scanner.nextLine());
-                    matrix[i] = line;
+                    matrix[i] = RawInputLineToStrArray(scanner.nextLine());
                 }
             }
 
@@ -117,7 +116,7 @@ public class Main {
         return false;
     }
 
-    public static String[] StringWithSymbolsDotsAndNumbersToStrArray(String line){
+    public static String[] RawInputLineToStrArray(String line){
         // This method takes a line and returns an array that will be usable by the code.
         // Examples:
         // "...." -> [".", ".", ".", "."]
@@ -136,14 +135,13 @@ public class Main {
 
             if (IsANumber(ChoppedUpLine[i]) == true){
                 StringBuilder Number = new StringBuilder();
+                Number.append(ChoppedUpLine[i]);
 
-                while(IsANumber(ChoppedUpLine[i])){
-                    Number.append(ChoppedUpLine[i]);
+                while(i + 1 != ChoppedUpLine.length && IsANumber(ChoppedUpLine[i+1])){
                     i++;
+                    Number.append(ChoppedUpLine[i]);
                 }
-
                 out.add(String.valueOf(Number));
-                i--;
             }
         }
 
