@@ -9,6 +9,7 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     // TODO: The IsAPartNumber method is not functioning properly, indexes can go out of bounds for the above and below line of the checked number.
+    // TODO: Should create a IsOnTheBottomOfMatrix and IsOnTheTopOfMatrix methods
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
