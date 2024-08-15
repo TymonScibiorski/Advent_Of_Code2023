@@ -195,6 +195,24 @@ public class MainTest {
         Assert.assertTrue(Main.IsIndexOnRightEdgeOfMatrix(matrix2, 1, 2));
     }
 
-    
+    @Test
+    public void TestIsLineOnTopEdgeOfMatrix(){
+        Assert.assertFalse(Main.IsLineOnTopEdgeOfMatrix(2));
+        Assert.assertFalse(Main.IsLineOnTopEdgeOfMatrix(1));
+        Assert.assertTrue(Main.IsLineOnTopEdgeOfMatrix(0));
+    }
+
+    @Test
+    public void TestIsLineOnBottomEdgeOfMatrix(){
+        String[][] matrix = {
+                {".", ".", "."},
+                {".", "1", "."},
+                {".", ".", "."}
+        };
+        Assert.assertTrue(Main.IsLineOnBottomEdgeOfMatrix(2, matrix));
+        Assert.assertFalse(Main.IsLineOnBottomEdgeOfMatrix(1, matrix));
+        Assert.assertFalse(Main.IsLineOnBottomEdgeOfMatrix(0, matrix));
+
+    }
 
 }
