@@ -212,7 +212,6 @@ public class MainTest {
         Assert.assertTrue(Main.IsLineOnBottomEdgeOfMatrix(2, matrix));
         Assert.assertFalse(Main.IsLineOnBottomEdgeOfMatrix(1, matrix));
         Assert.assertFalse(Main.IsLineOnBottomEdgeOfMatrix(0, matrix));
-
     }
 
 }
