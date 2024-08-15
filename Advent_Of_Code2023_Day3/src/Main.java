@@ -67,7 +67,7 @@ public class Main {
         }
 
         // Checking the line above the number, if it exists (if the number's line isn't the first one).
-        if(NumbersLine != 0) {
+        if(!IsLineOnTopEdgeOfMatrix(NumbersLine)) {
             int OneIfNumberOnTheLeftEdge = 0;
             int OneIfNumberOnTheRightEdge = 0;
             if(IsIndexOnLeftEdgeOfMatrix(NumbersPlaceInLine)){
@@ -99,7 +99,7 @@ public class Main {
         }
 
         // Checking the line after the number, if number's line isn't the last one in the matrix
-        if(NumbersLine+1 < matrix.length) {
+        if(!IsLineOnBottomEdgeOfMatrix(NumbersLine, matrix)) {
             int OneIfNumberOnTheLeftEdge = 0;
             int OneIfNumberOnTheRightEdge = 0;
             if(NumbersPlaceInLine == 0){

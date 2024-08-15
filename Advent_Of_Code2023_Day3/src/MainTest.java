@@ -77,6 +77,14 @@ public class MainTest {
                 Main.IsAPartNumber(matrix5, 0, 1)
         );
 
+        String[][] matrix6 = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix6, 0, 2)
+        );
     }
 
     @Test
