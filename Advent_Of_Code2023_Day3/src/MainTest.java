@@ -65,8 +65,16 @@ public class MainTest {
                 {".", "423", "."},
                 {".", ".", ".", ".", "."}
         };
-        Assert.assertTrue(
+        Assert.assertFalse(
                 Main.IsAPartNumber(matrix4, 0, 1)
+        );
+
+        String[][] matrix5 = {
+                {".", "423", "."},
+                {".", ".", "%", ".", "."}
+        };
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix5, 0, 1)
         );
 
     }
@@ -158,50 +166,35 @@ public class MainTest {
     }
 
     @Test
-    public void TestIsOnTheRightEdgeOfTheMatrix(){
-        String[][] matrix = {
-                {".", ".", "."},
-                {".", "1", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(Main.IsOnTheRightEdgeOfTheMatrix(matrix, 1, 1));
-
-        String[][] matrix1 = {
-                {".", ".", "."},
-                {"1", ".", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(Main.IsOnTheRightEdgeOfTheMatrix(matrix1, 0, 1));
-
-        String[][] matrix2 = {
-                {"$", "#", "@"},
-                {"*", "%", "34"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(Main.IsOnTheRightEdgeOfTheMatrix(matrix2, 1, 2));
+    public void TestIsIndexOnLeftEdgeOfMatrix(){
+        Assert.assertFalse(Main.IsIndexOnLeftEdgeOfMatrix(1));
+        Assert.assertTrue(Main.IsIndexOnLeftEdgeOfMatrix(0));
+        Assert.assertFalse(Main.IsIndexOnLeftEdgeOfMatrix(2));
     }
-
     @Test
-    public void TestIsOnTheLeftEdgeOfTheMatrix(){
+    public void TestIsIndexOnRightEdgeOfMatrix(){
         String[][] matrix = {
                 {".", ".", "."},
                 {".", "1", "."},
                 {".", ".", "."}
         };
-        Assert.assertFalse(Main.IsOnTheLeftEdgeOfTheMatrix(1));
+        Assert.assertFalse(Main.IsIndexOnRightEdgeOfMatrix(matrix, 1, 1));
 
         String[][] matrix1 = {
                 {".", ".", "."},
                 {"1", ".", "."},
                 {".", ".", "."}
         };
-        Assert.assertTrue(Main.IsOnTheLeftEdgeOfTheMatrix(0));
+        Assert.assertFalse(Main.IsIndexOnRightEdgeOfMatrix(matrix1, 0, 1));
 
         String[][] matrix2 = {
                 {"$", "#", "@"},
                 {"*", "%", "34"},
                 {"-", "=", "+"}
         };
-        Assert.assertFalse(Main.IsOnTheLeftEdgeOfTheMatrix(2));
+        Assert.assertTrue(Main.IsIndexOnRightEdgeOfMatrix(matrix2, 1, 2));
     }
+
+    
+
 }

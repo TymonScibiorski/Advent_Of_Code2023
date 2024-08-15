@@ -9,7 +9,6 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     // TODO: The IsAPartNumber method is not functioning properly, indexes can go out of bounds for the above and below line of the checked number.
-    // TODO: Should create a IsOnTheBottomOfMatrix and IsOnTheTopOfMatrix methods
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
@@ -71,10 +70,10 @@ public class Main {
         if(NumbersLine != 0) {
             int OneIfNumberOnTheLeftEdge = 0;
             int OneIfNumberOnTheRightEdge = 0;
-            if(IsOnTheLeftEdgeOfTheMatrix(NumbersPlaceInLine)){
+            if(IsIndexOnLeftEdgeOfMatrix(NumbersPlaceInLine)){
                 OneIfNumberOnTheLeftEdge = 1;
             }
-            if (IsOnTheRightEdgeOfTheMatrix(matrix, NumbersLine, NumbersPlaceInLine)){
+            if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)){
                 OneIfNumberOnTheRightEdge = 1;
             }
 
@@ -88,12 +87,12 @@ public class Main {
         }
 
         // Checking the line of the number, if the number isn't on an edge of the matrix.
-        if (IsOnTheLeftEdgeOfTheMatrix(NumbersLine)){ // Checking if the number isn't on the left edge.
+        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)){ // Checking if the number isn't on the left edge.
             if(IsASymbol(matrix[NumbersLine][NumbersPlaceInLine-1])){
                 return true;
             }
         }
-        if (IsOnTheRightEdgeOfTheMatrix(matrix, NumbersLine, NumbersPlaceInLine)) { // Checking if the number isn't on the right edge.
+        if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) { // Checking if the number isn't on the right edge.
             if (IsASymbol(matrix[NumbersLine][NumbersPlaceInLine + NumbersLength])){
                 return true;
             }
@@ -232,7 +231,22 @@ public class Main {
         return false;
     }
 
-    public static boolean IsOnTheRightEdgeOfTheMatrix(String[][] matrix, int LineNumber, int placeInLine){
+    public static boolean IsIndexOnLeftEdgeOfMatrix(int placeInLine){
+        // Determines if a specific item is on the left end of a line in a matrix.
+        // matrix = {
+        //      {"$", "#", "@"},
+        //      {"*", "%", "1"},
+        //      {"-", "=", "+"}
+        //        };
+        // If supplied the x coordinate of either "$", "*" or "-" the method would return True,
+        // and False for any of the following: "#", "@", "%", "1", "=", "+"
+
+        if(placeInLine == 0){
+            return true;
+        }
+        return false;
+    }
+    public static boolean IsIndexOnRightEdgeOfMatrix(String[][] matrix, int LineNumber, int placeInLine){
         // Determines if a specific item is on the right end of a line in a matrix.
         // matrix = {
         //      {"$", "#", "@"},
@@ -248,24 +262,18 @@ public class Main {
         return false;
     }
 
-    public static boolean IsOnTheLeftEdgeOfTheMatrix(int placeInLine){
-        // Determines if a specific item is on the left end of a line in a matrix.
-        // matrix = {
-        //      {"$", "#", "@"},
-        //      {"*", "%", "1"},
-        //      {"-", "=", "+"}
-        //        };
-        // If supplied the x coordinate of either "$", "*" or "-" the method would return True,
-        // and False for any of the following: "#", "@", "%", "1", "=", "+"
-
-        if(placeInLine == 0){
-            return true;
-        }
-        return false;
-    }
 
     //I figure the code should "for" through the input and convert it into a two-dimensional array.
     //This array would store three types of objects: Periods, Symbols and Numbers
     //Then, the array would be "for'ed" through once again and part numbers would be determined and sorted.
 
+    public static boolean IsLineOnTopEdgeOfMatrix(int LineNumber){
+        // Returns true if a given line is on the top edge of a matrix, which is true only when it's line zero.
+        return LineNumber == 0;
+    }
+
+    public static boolean IsLineOnBottomEdgeOfMatrix(int LineNumber, String[][] matrix){
+        // Returns true if a line is on the bottom edge of a matrix, which is true only when it's matching the matrix's length (- one, because of how it's counted).
+        return LineNumber == (matrix.length - 1);
+    }
 }
