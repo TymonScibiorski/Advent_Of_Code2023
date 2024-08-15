@@ -68,22 +68,9 @@ public class Main {
 
         // Checking the line above the number, if it exists (if the number's line isn't the first one).
         if(!IsLineOnTopEdgeOfMatrix(NumbersLine)) {
-            int OneIfNumberOnTheLeftEdge = 0;
-            int OneIfNumberOnTheRightEdge = 0;
-            if(IsIndexOnLeftEdgeOfMatrix(NumbersPlaceInLine)){
-                OneIfNumberOnTheLeftEdge = 1;
+            if(IsAPartNumberLineAbove(matrix, NumbersLine, NumbersPlaceInLine)){
+                return true;
             }
-            if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)){
-                OneIfNumberOnTheRightEdge = 1;
-            }
-
-                for (int i = NumbersPlaceInLine + OneIfNumberOnTheLeftEdge; i < NumbersLength + NumbersPlaceInLine + OneIfNumberOnTheRightEdge; i++) {
-                    if (IsASymbol(
-                            matrix[NumbersLine - 1][i]
-                    )) {
-                        return true;
-                    }
-                }
         }
 
         // Checking the line of the number, if the number isn't on an edge of the matrix.
@@ -118,6 +105,30 @@ public class Main {
             }
         }
 
+        return false;
+    }
+
+    public static boolean IsAPartNumberLineAbove(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
+        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)) {
+
+        } else if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) {
+
+        }
+        else{
+
+        }
+        return false;
+    }
+
+    public static boolean IsAPartNumberLineBelow(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
+        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)) {
+
+        } else if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) {
+
+        }
+        else{
+
+        }
         return false;
     }
 

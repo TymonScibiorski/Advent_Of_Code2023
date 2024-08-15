@@ -88,6 +88,48 @@ public class MainTest {
     }
 
     @Test
+    public void TestIsAPartNumberLineAbove(){
+        String[][] matrix = {
+                {".", ".", ".", ".", "."},
+                {".", "423", "."}
+        };
+        Assert.assertFalse(Main.IsAPartNumberLineAbove(matrix, 1, 1));
+
+        String[][] matrix1 = {
+                {"%", ".", ".", ".", "."},
+                {".", "423", "."}
+        };
+        Assert.assertTrue(Main.IsAPartNumberLineAbove(matrix1, 1, 1));
+
+        String[][] matrix2 = {
+                {"%", "75", ".", "."},
+                {".", "423", "."}
+        };
+        Assert.assertTrue(Main.IsAPartNumberLineAbove(matrix2, 1, 1));
+    }
+
+    @Test
+    public void TestIsAPartNumberLineBelow(){
+        String[][] matrix = {
+                {".", "423", "."},
+                {".", ".", ".", ".", "."},
+        };
+        Assert.assertFalse(Main.IsAPartNumberLineBelow(matrix, 0, 1));
+
+        String[][] matrix1 = {
+                {".", "423", "."},
+                {"%", ".", ".", ".", "."},
+        };
+        Assert.assertTrue(Main.IsAPartNumberLineBelow(matrix1, 0, 1));
+
+        String[][] matrix2 = {
+                {".", "423", "."},
+                {"%", "75", ".", "."}
+        };
+        Assert.assertTrue(Main.IsAPartNumberLineBelow(matrix2, 0, 1));
+    }
+
+    @Test
     public void TestRawInputLineToStrArray(){
         Assert.assertEquals(new String[]{"467", ".", ".", "114", ".", ".", "."},
                 Main.RawInputLineToStrArray("467..114..."));
