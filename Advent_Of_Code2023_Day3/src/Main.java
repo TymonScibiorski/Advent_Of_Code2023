@@ -10,6 +10,7 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     // TODO: The IsAPartNumber method is not functioning properly, indexes can go out of bounds for the above and below line of the checked number.
+    // TODO: The IsAPartNumber method is functioning properly, but I would like to extract that work to the more reusable method ExtractingSurrounding
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
