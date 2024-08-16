@@ -130,6 +130,27 @@ public class MainTest {
     }
 
     @Test
+    public void TestExtractLeftAndRight(){
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Assert.assertEquals(new String[]{"*", "@"}, Main.ExtractLeftAndRight(matrix,1, 1, false, false));
+
+        String[][] matrix1 = {
+                {""}
+        };
+        Assert.assertEquals(new String[]{}, Main.ExtractLeftAndRight(matrix1, 0, 0, true, true));
+
+        String[][] matrix2 = {
+                {"@", "1"}
+        };
+        Assert.assertEquals(new String[]{"@"}, Main.ExtractLeftAndRight(matrix2, 0, 1, false, true));
+        Assert.assertEquals(new String[]{"1"}, Main.ExtractLeftAndRight(matrix2, 0, 0, true, false));
+    }
+
+    @Test
     public void TestRawInputLineToStrArray(){
         Assert.assertEquals(new String[]{"467", ".", ".", "114", ".", ".", "."},
                 Main.RawInputLineToStrArray("467..114..."));

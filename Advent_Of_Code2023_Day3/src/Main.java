@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
@@ -74,12 +75,12 @@ public class Main {
         }
 
         // Checking the line of the number, if the number isn't on an edge of the matrix.
-        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)){ // Checking if the number isn't on the left edge.
+        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)){ // If the number isn't on the left edge, it's left side gets checked
             if(IsASymbol(matrix[NumbersLine][NumbersPlaceInLine-1])){
                 return true;
             }
         }
-        if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) { // Checking if the number isn't on the right edge.
+        if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) { // If the number isn't on the right edge, it's right side gets checked
             if (IsASymbol(matrix[NumbersLine][NumbersPlaceInLine + NumbersLength])){
                 return true;
             }
@@ -109,16 +110,55 @@ public class Main {
     }
 
     public static boolean IsAPartNumberLineAbove(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
+        int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
+
         if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)) {
+            for (int i = 0; i < NumbersLength+1; i++) {
+
+                if(IsANumber(matrix[NumbersLine-1][i])){
+                    i += matrix[NumbersLine-1][i].length();
+                }
+
+                else{
+                    if(IsASymbol(matrix[NumbersLine-1][i])){
+                        return true;
+                    }
+                }
+            }
 
         } else if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) {
+            for (int i = NumbersPlaceInLine-1; i < NumbersLength+1; i++) {
 
+                if(IsANumber(matrix[NumbersLine-1][i])){
+                    i += matrix[NumbersLine-1][i].length();
+                }
+
+                else{
+                    if(IsASymbol(matrix[NumbersLine-1][i])){
+                        return true;
+                    }
+                }
+            }
         }
         else{
+            for (int i = NumbersPlaceInLine-1; i < NumbersLength+2; i++) {
+
+                if(IsANumber(matrix[NumbersLine-1][i])){
+                    i += matrix[NumbersLine-1][i].length();
+                }
+
+                else{
+                    if(IsASymbol(matrix[NumbersLine-1][i])){
+                        return true;
+                    }
+                }
+            }
 
         }
         return false;
     }
+
+
 
     public static boolean IsAPartNumberLineBelow(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
         if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)) {
@@ -130,6 +170,34 @@ public class Main {
 
         }
         return false;
+    }
+
+    public static Stack<String> ExtractSurroundings(String[][] matrix, int LineNumber, int PlaceInLineIndex){
+        Stack<String> out = new Stack<>();
+
+        boolean isIndexOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(LineNumber);
+        boolean isIndexOnRightEdgeOfMatrix = IsIndexOnRightEdgeOfMatrix(matrix, LineNumber, PlaceInLineIndex);
+        boolean isLineOnTopEdgeOfMatrix = IsLineOnTopEdgeOfMatrix(LineNumber);
+        boolean isLineOnBottomEdgeOfMatrix = IsLineOnBottomEdgeOfMatrix(LineNumber, matrix);
+
+        int mainsLength = matrix[LineNumber][PlaceInLineIndex].length();
+
+
+
+        return out;
+    }
+
+    public static String[] ExtractLeftAndRight(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnLeftEdgeOfMatrix, boolean isIndexOnRightEdgeOfMatrix){
+        ArrayList<String> out = new ArrayList<String>();
+
+        if (!isIndexOnLeftEdgeOfMatrix){
+            out.add(matrix[LineNumber][PlaceInLineIndex-1]);
+        }
+        if (!isIndexOnRightEdgeOfMatrix){
+            out.add(matrix[LineNumber][PlaceInLineIndex+1]);
+        }
+
+        return ConvertArrayListStringToStringArray(out);
     }
 
     public static String[] RawInputLineToStrArray(String line){
