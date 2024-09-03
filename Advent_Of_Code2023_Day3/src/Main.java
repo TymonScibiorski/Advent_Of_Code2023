@@ -174,6 +174,15 @@ public class Main {
     }
 
     public static Stack<String> ExtractSurroundings(String[][] matrix, int LineNumber, int PlaceInLineIndex){
+        //This function extracts strings surrounding a provided coordinate in a matrix
+        //Example:
+        // matrix = {
+        //      {"$", "#", "@"},
+        //      {"*", "1", "%"},
+        //      {"-", "=", "+"}
+        //        };
+        // A stack containing the following strings would be returned: "$", "#", "@", "*", "%", "-", "=", "+"
+
         Stack<String> out = new Stack<>();
 
         boolean isIndexOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(LineNumber);
@@ -185,11 +194,12 @@ public class Main {
 
 
 
+
         return out;
     }
 
-    public static String[] ExtractLeftAndRight(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnLeftEdgeOfMatrix, boolean isIndexOnRightEdgeOfMatrix){
-        ArrayList<String> out = new ArrayList<String>();
+    public static Stack<String> ExtractLeftAndRight(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnLeftEdgeOfMatrix, boolean isIndexOnRightEdgeOfMatrix){
+        Stack<String> out = new Stack<>();
 
         if (!isIndexOnLeftEdgeOfMatrix){
             out.add(matrix[LineNumber][PlaceInLineIndex-1]);
@@ -198,8 +208,9 @@ public class Main {
             out.add(matrix[LineNumber][PlaceInLineIndex+1]);
         }
 
-        return ConvertArrayListStringToStringArray(out);
+        return out;
     }
+    public static String ExtractLeftFromMatr
 
     public static String[] RawInputLineToStrArray(String line){
         // This method takes a line and returns an array that will be usable by the code.
