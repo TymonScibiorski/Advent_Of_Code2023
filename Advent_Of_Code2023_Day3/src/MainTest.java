@@ -151,6 +151,26 @@ public class MainTest {
     }
 
     @Test
+    public void TestExtractFromTheLeftInMatrix(){
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Assert.assertEquals("$", Main.ExtractFromTheLeftInMatrix(matrix, 0, 1, false));
+        Assert.assertEquals("*", Main.ExtractFromTheLeftInMatrix(matrix, 1, 1, false));
+        Assert.assertEquals("-", Main.ExtractFromTheLeftInMatrix(matrix, 2, 1, false));
+
+        Assert.assertEquals(".", Main.ExtractFromTheLeftInMatrix(matrix, 0, 2, false));
+        Assert.assertEquals(".", Main.ExtractFromTheLeftInMatrix(matrix, 1, 2, false));
+        Assert.assertEquals("=", Main.ExtractFromTheLeftInMatrix(matrix, 2, 2, false));
+
+        Assert.assertEquals(null, Main.ExtractFromTheLeftInMatrix(matrix, 0, 0, true));
+        Assert.assertEquals(null, Main.ExtractFromTheLeftInMatrix(matrix, 1, 0, true));
+        Assert.assertEquals(null, Main.ExtractFromTheLeftInMatrix(matrix, 2, 0, true));
+    }
+
+    @Test
     public void TestRawInputLineToStrArray(){
         Assert.assertEquals(new String[]{"467", ".", ".", "114", ".", ".", "."},
                 Main.RawInputLineToStrArray("467..114..."));

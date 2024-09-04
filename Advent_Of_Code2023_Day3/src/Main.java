@@ -210,7 +210,19 @@ public class Main {
 
         return out;
     }
-    public static String ExtractLeftFromMatr
+    public static String ExtractFromTheLeftInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnLeftEdgeOfMatrix){
+        if(!isIndexOnLeftEdgeOfMatrix){
+            return matrix[LineNumber][PlaceInLineIndex-1];
+        }
+        return null;
+    }
+
+    public static String ExtractIndexOnTheRightInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnRightEdgeOfMatrix){
+        if(!isIndexOnRightEdgeOfMatrix){
+            return matrix[LineNumber][PlaceInLineIndex+1];
+        }
+        return null;
+    }
 
     public static String[] RawInputLineToStrArray(String line){
         // This method takes a line and returns an array that will be usable by the code.
