@@ -1,3 +1,4 @@
+import javax.sound.sampled.Line;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -185,12 +186,12 @@ public class Main {
 
         Stack<String> out = new Stack<>();
 
-        boolean isIndexOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(LineNumber);
-        boolean isIndexOnRightEdgeOfMatrix = IsIndexOnRightEdgeOfMatrix(matrix, LineNumber, PlaceInLineIndex);
-        boolean isLineOnTopEdgeOfMatrix = IsLineOnTopEdgeOfMatrix(LineNumber);
+        boolean isTargetOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(LineNumber);
+        boolean isTargetOnRightEdgeOfMatrix = IsIndexOnRightEdgeOfMatrix(matrix, LineNumber, PlaceInLineIndex);
+        boolean isTargetLineOnTopEdgeOfMatrix = IsLineOnTopEdgeOfMatrix(LineNumber);
         boolean isLineOnBottomEdgeOfMatrix = IsLineOnBottomEdgeOfMatrix(LineNumber, matrix);
 
-        int mainsLength = matrix[LineNumber][PlaceInLineIndex].length();
+        int targetsLength = matrix[LineNumber][PlaceInLineIndex].length();
 
 
 
@@ -198,27 +199,36 @@ public class Main {
         return out;
     }
 
-    public static Stack<String> ExtractLeftAndRight(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnLeftEdgeOfMatrix, boolean isIndexOnRightEdgeOfMatrix){
+    public static Stack<String> ExtractLineAboveInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, int targetsLength, boolean isTargetOnLeftEdgeOfMatrix, boolean isTargetOnRightEdgeOfMatrix, boolean isTargetLineOnTopEdgeOfMatrix){
         Stack<String> out = new Stack<>();
 
-        if (!isIndexOnLeftEdgeOfMatrix){
-            out.add(matrix[LineNumber][PlaceInLineIndex-1]);
+        if(isTargetLineOnTopEdgeOfMatrix){
+            return out;
         }
-        if (!isIndexOnRightEdgeOfMatrix){
-            out.add(matrix[LineNumber][PlaceInLineIndex+1]);
+
+        // Top-left diagonal
+        if(!isTargetOnLeftEdgeOfMatrix){
+            out.add(matrix[LineNumber-1][PlaceInLineIndex-1]);
         }
+        // Top-right diagonal
+        if(!isTargetOnRightEdgeOfMatrix){
+            out.add(matrix[LineNumber-1][PlaceInLineIndex+targetsLength]);
+        }
+
+        //TODO The logic that will extract what's directly above the entire target's length should go here
 
         return out;
     }
-    public static String ExtractFromTheLeftInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnLeftEdgeOfMatrix){
-        if(!isIndexOnLeftEdgeOfMatrix){
+
+    public static String ExtractFromTheLeftInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnLeftEdgeOfMatrix){
+        if(!isTargetOnLeftEdgeOfMatrix){
             return matrix[LineNumber][PlaceInLineIndex-1];
         }
         return null;
     }
 
-    public static String ExtractIndexOnTheRightInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isIndexOnRightEdgeOfMatrix){
-        if(!isIndexOnRightEdgeOfMatrix){
+    public static String ExtractIndexOnTheRightInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnRightEdgeOfMatrix){
+        if(!isTargetOnRightEdgeOfMatrix){
             return matrix[LineNumber][PlaceInLineIndex+1];
         }
         return null;
