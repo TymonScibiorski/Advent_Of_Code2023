@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class MainTest {
 
@@ -168,6 +169,32 @@ public class MainTest {
         Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 0, 2, true));
         Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 1, 2, true));
         Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 2, 2, true));
+    }
+
+    @Test
+    public void TestExtractLineAboveInMatrix(){
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Stack<String> expectedStack = new Stack<>();
+        expectedStack.push("$");
+        expectedStack.push(".");
+        expectedStack.push("1");
+        Stack<String> actualStack = Main.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
+
+        boolean forAssertion = true;
+        for(String currentString : expectedStack){
+            if(currentString.equals(actualStack.pop())){
+                continue;
+            }
+            else{
+                forAssertion = false;
+            }
+        }
+        Assert.assertTrue(forAssertion);
+
     }
 
     @Test

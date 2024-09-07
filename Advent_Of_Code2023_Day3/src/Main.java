@@ -208,14 +208,17 @@ public class Main {
 
         // Top-left diagonal
         if(!isTargetOnLeftEdgeOfMatrix){
-            out.add(matrix[LineNumber-1][PlaceInLineIndex-1]);
+            out.push(matrix[LineNumber-1][PlaceInLineIndex-1]);
         }
         // Top-right diagonal
         if(!isTargetOnRightEdgeOfMatrix){
-            out.add(matrix[LineNumber-1][PlaceInLineIndex+targetsLength]);
+            out.push(matrix[LineNumber-1][PlaceInLineIndex+targetsLength]);
         }
 
-        //TODO The logic that will extract what's directly above the entire target's length should go here
+        //TODO The logic that will extract what's directly above the entire target's length should go here. Should add numbers that compose of more than one digit as a single string.
+        for (int i = PlaceInLineIndex; i < targetsLength; i++) {
+            out.push(matrix[LineNumber-1][i]);
+        }
 
         return out;
     }
