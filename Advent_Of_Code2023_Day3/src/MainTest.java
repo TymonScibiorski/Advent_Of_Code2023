@@ -89,73 +89,92 @@ public class MainTest {
     }
 
     @Test
-    public void TestIsAPartNumberLineAbove(){
+    public void TestExtractSurroundings(){
         String[][] matrix = {
-                {".", ".", ".", ".", "."},
-                {".", "423", "."}
+                {".", ".", "."},
+                {".", "1", "."},
+                {".", ".", "."}
         };
-        Assert.assertFalse(Main.IsAPartNumberLineAbove(matrix, 1, 1));
-
+        Assert.assertEquals(new Stack<String>,
+                Main.ExtractSurroundings(matrix, 1, 1)
+        );
         String[][] matrix1 = {
-                {"%", ".", ".", ".", "."},
-                {".", "423", "."}
+                {".", ".", "."},
+                {"1", ".", "."},
+                {".", ".", "."}
         };
-        Assert.assertTrue(Main.IsAPartNumberLineAbove(matrix1, 1, 1));
+        Assert.assertFalse(
+                Main.IsAPartNumber(matrix1, 1, 0)
+        );
 
         String[][] matrix2 = {
-                {"%", "75", ".", "."},
-                {".", "423", "."}
+                {"$", "#", "@"},
+                {"*", "1", "%"},
+                {"-", "=", "+"}
         };
-        Assert.assertTrue(Main.IsAPartNumberLineAbove(matrix2, 1, 1));
-    }
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix2, 1, 1)
+        );
+        String[][] matrix3 = {
+                {"$", "#", "@"},
+                {"*", "%", "1"},
+                {"-", "=", "+"}
+        };
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix3, 1, 2)
+        );
 
-    @Test
-    public void TestIsAPartNumberLineBelow(){
-        String[][] matrix = {
+        String[][] matrix4 = {
                 {".", "423", "."},
-                {".", ".", ".", ".", "."},
+                {".", ".", ".", ".", "."}
         };
-        Assert.assertFalse(Main.IsAPartNumberLineBelow(matrix, 0, 1));
+        Assert.assertFalse(
+                Main.IsAPartNumber(matrix4, 0, 1)
+        );
 
-        String[][] matrix1 = {
+        String[][] matrix5 = {
                 {".", "423", "."},
-                {"%", ".", ".", ".", "."},
+                {".", ".", "%", ".", "."}
         };
-        Assert.assertTrue(Main.IsAPartNumberLineBelow(matrix1, 0, 1));
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix5, 0, 1)
+        );
 
-        String[][] matrix2 = {
-                {".", "423", "."},
-                {"%", "75", ".", "."}
-        };
-        Assert.assertTrue(Main.IsAPartNumberLineBelow(matrix2, 0, 1));
-    }
-    
-
-    @Test
-    public void TestExtractFromTheLeftInMatrix(){
-        String[][] matrix = {
+        String[][] matrix6 = {
                 {"$", ".", "1"},
                 {"*", ".", "@"},
                 {"-", "=", "+"}
         };
-        Assert.assertEquals("$", Main.ExtractFromTheLeftInMatrix(matrix, 0, 1, false));
-        Assert.assertEquals("*", Main.ExtractFromTheLeftInMatrix(matrix, 1, 1, false));
-        Assert.assertEquals("-", Main.ExtractFromTheLeftInMatrix(matrix, 2, 1, false));
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix6, 0, 2)
+        );
+    }
 
-        Assert.assertEquals(".", Main.ExtractFromTheLeftInMatrix(matrix, 0, 2, false));
-        Assert.assertEquals(".", Main.ExtractFromTheLeftInMatrix(matrix, 1, 2, false));
-        Assert.assertEquals("=", Main.ExtractFromTheLeftInMatrix(matrix, 2, 2, false));
+    @Test
+    public void TestExtractIndexOnTheLeftInMatrix(){
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"36", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Assert.assertEquals("$", Main.ExtractIndexOnTheLeftInMatrix(matrix, 0, 1, false));
+        Assert.assertEquals("36", Main.ExtractIndexOnTheLeftInMatrix(matrix, 1, 1, false));
+        Assert.assertEquals("-", Main.ExtractIndexOnTheLeftInMatrix(matrix, 2, 1, false));
 
-        Assert.assertEquals(null, Main.ExtractFromTheLeftInMatrix(matrix, 0, 0, true));
-        Assert.assertEquals(null, Main.ExtractFromTheLeftInMatrix(matrix, 1, 0, true));
-        Assert.assertEquals(null, Main.ExtractFromTheLeftInMatrix(matrix, 2, 0, true));
+        Assert.assertEquals(".", Main.ExtractIndexOnTheLeftInMatrix(matrix, 0, 2, false));
+        Assert.assertEquals(".", Main.ExtractIndexOnTheLeftInMatrix(matrix, 1, 2, false));
+        Assert.assertEquals("=", Main.ExtractIndexOnTheLeftInMatrix(matrix, 2, 2, false));
+
+        Assert.assertEquals(null, Main.ExtractIndexOnTheLeftInMatrix(matrix, 0, 0, true));
+        Assert.assertEquals(null, Main.ExtractIndexOnTheLeftInMatrix(matrix, 1, 0, true));
+        Assert.assertEquals(null, Main.ExtractIndexOnTheLeftInMatrix(matrix, 2, 0, true));
     }
 
     @Test
     public void TestExtractIndexOnTheRightInMatrix(){
         String[][] matrix = {
                 {"$", ".", "1"},
-                {"*", ".", "@"},
+                {"*", ".", "9"},
                 {"-", "=", "+"}
         };
         Assert.assertEquals(".", Main.ExtractIndexOnTheRightInMatrix(matrix, 0, 0, false));
@@ -163,7 +182,7 @@ public class MainTest {
         Assert.assertEquals("=", Main.ExtractIndexOnTheRightInMatrix(matrix, 2, 0, false));
 
         Assert.assertEquals("1", Main.ExtractIndexOnTheRightInMatrix(matrix, 0, 1, false));
-        Assert.assertEquals("@", Main.ExtractIndexOnTheRightInMatrix(matrix, 1, 1, false));
+        Assert.assertEquals("9", Main.ExtractIndexOnTheRightInMatrix(matrix, 1, 1, false));
         Assert.assertEquals("+", Main.ExtractIndexOnTheRightInMatrix(matrix, 2, 1, false));
 
         Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 0, 2, true));
@@ -179,21 +198,41 @@ public class MainTest {
                 {"-", "=", "+"}
         };
         Stack<String> expectedStack = new Stack<>();
-        expectedStack.push("$");
-        expectedStack.push(".");
         expectedStack.push("1");
+        expectedStack.push(".");
+        expectedStack.push("$");
         Stack<String> actualStack = Main.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
+        boolean forAssertion0 = true;
 
-        boolean forAssertion = true;
-        for(String currentString : expectedStack){
-            if(currentString.equals(actualStack.pop())){
-                continue;
-            }
-            else{
-                forAssertion = false;
+        for(String currentStringFromExpectedStack : expectedStack){
+            String currentStringFromActualStack = actualStack.pop();
+            if(!currentStringFromExpectedStack.equals(currentStringFromActualStack)){
+                forAssertion0 = false;
+                break;
             }
         }
-        Assert.assertTrue(forAssertion);
+        Assert.assertTrue(forAssertion0);
+
+        String[][] matrix1 = {
+                {"$", "46", "1"},
+                {"*", ".", "@", "5"},
+                {"-", "=", "+", "."}
+        };
+        Stack<String> expectedStack1 = new Stack<>();
+        expectedStack.push("1");
+        expectedStack.push("46");
+        expectedStack.push("$");
+        Stack<String> actualStack1 = Main.ExtractLineAboveInMatrix(matrix1, 1, 1, 1, false, false, false);
+        boolean forAssertion1 = true;
+
+        for(String currentStringFromExpectedStack : expectedStack1){
+            String currentStringFromActualStack = actualStack1.pop();
+            if(!currentStringFromExpectedStack.equals(currentStringFromActualStack)){
+                forAssertion1 = false;
+                break;
+            }
+        }
+        Assert.assertTrue(forAssertion1);
 
     }
 

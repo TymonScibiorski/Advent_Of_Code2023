@@ -10,8 +10,8 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    // TODO: The IsAPartNumber method is not functioning properly, indexes can go out of bounds for the above and below line of the checked number.
-    // TODO: The IsAPartNumber method is functioning properly, but I would like to extract that work to the more reusable method ExtractingSurrounding
+    //  The IsAPartNumber method is not functioning properly, which must be because of the ExtractSurroundings method.
+    //  TODO: To the ExtractSurroundings method: tests to be added, problem to be figured out.
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
@@ -62,117 +62,17 @@ public class Main {
         // by checking if it is adjacent to a symbol with the IsASymbol method.
         // As input, it takes the matrix and the number's coordinates.
 
-        int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
+        Stack<String> Surroundings = ExtractSurroundings(matrix, NumbersLine, NumbersPlaceInLine);
 
-        if(!IsANumber(matrix[NumbersLine][NumbersPlaceInLine])){
-            return false;
-            // A partNumber must be a number.
-        }
-
-        // Checking the line above the number, if it exists (if the number's line isn't the first one).
-        if(!IsLineOnTopEdgeOfMatrix(NumbersLine)) {
-            if(IsAPartNumberLineAbove(matrix, NumbersLine, NumbersPlaceInLine)){
+        for (String oneOfStringSurrounding : Surroundings) {
+            if (IsASymbol(oneOfStringSurrounding)) {
                 return true;
-            }
-        }
-
-        // Checking the line of the number, if the number isn't on an edge of the matrix.
-        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)){ // If the number isn't on the left edge, it's left side gets checked
-            if(IsASymbol(matrix[NumbersLine][NumbersPlaceInLine-1])){
-                return true;
-            }
-        }
-        if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) { // If the number isn't on the right edge, it's right side gets checked
-            if (IsASymbol(matrix[NumbersLine][NumbersPlaceInLine + NumbersLength])){
-                return true;
-            }
-        }
-
-        // Checking the line after the number, if number's line isn't the last one in the matrix
-        if(!IsLineOnBottomEdgeOfMatrix(NumbersLine, matrix)) {
-            int OneIfNumberOnTheLeftEdge = 0;
-            int OneIfNumberOnTheRightEdge = 0;
-            if(NumbersPlaceInLine == 0){
-                OneIfNumberOnTheLeftEdge = 1;
-            }
-            if (NumbersLength + NumbersPlaceInLine < matrix[NumbersLine + 1].length){
-                OneIfNumberOnTheRightEdge = 1;
-            }
-
-            for (int i = NumbersPlaceInLine + OneIfNumberOnTheLeftEdge; i < NumbersLength + NumbersPlaceInLine + OneIfNumberOnTheRightEdge; i++) {
-                if (IsASymbol(
-                        matrix[NumbersLine + 1][i]
-                )) {
-                    return true;
-                }
             }
         }
 
         return false;
     }
 
-    public static boolean IsAPartNumberLineAbove(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
-        int NumbersLength = matrix[NumbersLine][NumbersPlaceInLine].length();
-
-        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)) {
-            for (int i = 0; i < NumbersLength+1; i++) {
-
-                if(IsANumber(matrix[NumbersLine-1][i])){
-                    i += matrix[NumbersLine-1][i].length();
-                }
-
-                else{
-                    if(IsASymbol(matrix[NumbersLine-1][i])){
-                        return true;
-                    }
-                }
-            }
-
-        } else if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) {
-            for (int i = NumbersPlaceInLine-1; i < NumbersLength+1; i++) {
-
-                if(IsANumber(matrix[NumbersLine-1][i])){
-                    i += matrix[NumbersLine-1][i].length();
-                }
-
-                else{
-                    if(IsASymbol(matrix[NumbersLine-1][i])){
-                        return true;
-                    }
-                }
-            }
-        }
-        else{
-            for (int i = NumbersPlaceInLine-1; i < NumbersLength+2; i++) {
-
-                if(IsANumber(matrix[NumbersLine-1][i])){
-                    i += matrix[NumbersLine-1][i].length();
-                }
-
-                else{
-                    if(IsASymbol(matrix[NumbersLine-1][i])){
-                        return true;
-                    }
-                }
-            }
-
-        }
-        return false;
-    }
-
-
-
-    public static boolean IsAPartNumberLineBelow(String[][] matrix, int NumbersLine, int NumbersPlaceInLine){
-        if (IsIndexOnLeftEdgeOfMatrix(NumbersLine)) {
-
-        } else if (IsIndexOnRightEdgeOfMatrix(matrix, NumbersLine, NumbersPlaceInLine)) {
-
-        }
-        else{
-
-        }
-        return false;
-    }
 
     public static Stack<String> ExtractSurroundings(String[][] matrix, int LineNumber, int PlaceInLineIndex){
         //This function extracts strings surrounding a provided coordinate in a matrix
@@ -189,17 +89,37 @@ public class Main {
         boolean isTargetOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(LineNumber);
         boolean isTargetOnRightEdgeOfMatrix = IsIndexOnRightEdgeOfMatrix(matrix, LineNumber, PlaceInLineIndex);
         boolean isTargetLineOnTopEdgeOfMatrix = IsLineOnTopEdgeOfMatrix(LineNumber);
-        boolean isLineOnBottomEdgeOfMatrix = IsLineOnBottomEdgeOfMatrix(LineNumber, matrix);
+        boolean isTargetLineOnBottomEdgeOfMatrix = IsLineOnBottomEdgeOfMatrix(LineNumber, matrix);
 
         int targetsLength = matrix[LineNumber][PlaceInLineIndex].length();
 
+        //Adding all stacks to the outStack
+        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix);
+        for (String currentStringInStackLineAbove : LineAbove) {
+            out.push(currentStringInStackLineAbove);
+        }
 
+        out.push(ExtractIndexOnTheLeftInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnLeftEdgeOfMatrix));
+        out.push(ExtractIndexOnTheRightInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnRightEdgeOfMatrix));
 
+        Stack<String> LineBelow = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnBottomEdgeOfMatrix);
+        for (String currentStringInStackLineBelow : LineBelow) {
+            out.push(currentStringInStackLineBelow);
+        }
+        
 
         return out;
     }
 
     public static Stack<String> ExtractLineAboveInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, int targetsLength, boolean isTargetOnLeftEdgeOfMatrix, boolean isTargetOnRightEdgeOfMatrix, boolean isTargetLineOnTopEdgeOfMatrix){
+        // Extracts contents that are directly above and diagonally to the top-right and top-left to a certain target.
+        // Example:
+//        String[][] matrix1 = {
+//                {"$", "46", "1"},
+//                {"*", ".", "@", "5"},
+//                {"-", "=", "+", "."}
+//        };
+        // Returns a stack containing: 1, 46, $
         Stack<String> out = new Stack<>();
 
         if(isTargetLineOnTopEdgeOfMatrix){
@@ -210,20 +130,26 @@ public class Main {
         if(!isTargetOnLeftEdgeOfMatrix){
             out.push(matrix[LineNumber-1][PlaceInLineIndex-1]);
         }
+
+        for (int i = PlaceInLineIndex; i < PlaceInLineIndex+targetsLength; i++) {
+            String currentString = matrix[LineNumber-1][i];
+
+            if(IsANumber(currentString)){
+                i += currentString.length();
+            }
+
+            out.push(currentString);
+        }
+
         // Top-right diagonal
         if(!isTargetOnRightEdgeOfMatrix){
             out.push(matrix[LineNumber-1][PlaceInLineIndex+targetsLength]);
         }
 
-        //TODO The logic that will extract what's directly above the entire target's length should go here. Should add numbers that compose of more than one digit as a single string.
-        for (int i = PlaceInLineIndex; i < targetsLength; i++) {
-            out.push(matrix[LineNumber-1][i]);
-        }
-
         return out;
     }
 
-    public static String ExtractFromTheLeftInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnLeftEdgeOfMatrix){
+    public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnLeftEdgeOfMatrix){
         if(!isTargetOnLeftEdgeOfMatrix){
             return matrix[LineNumber][PlaceInLineIndex-1];
         }
@@ -237,11 +163,50 @@ public class Main {
         return null;
     }
 
+    public static Stack<String> ExtractLineBelowInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, int targetsLength, boolean isTargetOnLeftEdgeOfMatrix, boolean isTargetOnRightEdgeOfMatrix, boolean isTargetLineOnBottomEdgeOfMatrix){
+        // Extracts contents that are directly above and diagonally to the top-right and top-left to a certain target.
+        // Example:
+//        String[][] matrix1 = {
+//                {"$", "46", "1"},
+//                {"*", ".", "@", "5"},
+//                {"-", "=", "+", "."}
+//        };
+        // Returns a stack containing: 1, 46, $
+        Stack<String> out = new Stack<>();
+
+        if(isTargetLineOnBottomEdgeOfMatrix){
+            return out;
+        }
+
+        // Extracts bottom-left diagonal
+        if(!isTargetOnLeftEdgeOfMatrix){
+            out.push(matrix[LineNumber+1][PlaceInLineIndex-1]);
+        }
+
+        // Extracts directly beneath the entire target's length
+        for (int i = PlaceInLineIndex; i < PlaceInLineIndex+targetsLength; i++) {
+            String currentString = matrix[LineNumber+1][i];
+
+            if(IsANumber(currentString)){
+                i += currentString.length();
+            }
+
+            out.push(currentString);
+        }
+
+        // Extracts bottom-right diagonal
+        if(!isTargetOnRightEdgeOfMatrix){
+            out.push(matrix[LineNumber+1][PlaceInLineIndex+targetsLength]);
+        }
+
+        return out;
+    }
+
     public static String[] RawInputLineToStrArray(String line){
         // This method takes a line and returns an array that will be usable by the code.
         // Examples:
         // "...." -> [".", ".", ".", "."]
-        // "..46.." -> [".", ".", "46", ".", "."]
+        // "..46.$" -> [".", ".", "46", ".", "$"]
 
         char[] ChoppedUpLine = line.toCharArray();
         ArrayList<String> out = new ArrayList<>();
