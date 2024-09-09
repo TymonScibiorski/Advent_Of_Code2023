@@ -64,6 +64,11 @@ public class Main {
 
         Stack<String> Surroundings = ExtractSurroundings(matrix, NumbersLine, NumbersPlaceInLine);
 
+        if(!IsANumber(matrix[NumbersLine][NumbersPlaceInLine])){
+            // If the target is not a number it cannot be a partNumber
+            return false;
+        }
+
         for (String oneOfStringSurrounding : Surroundings) {
             if (IsASymbol(oneOfStringSurrounding)) {
                 return true;
@@ -94,15 +99,17 @@ public class Main {
         int targetsLength = matrix[LineNumber][PlaceInLineIndex].length();
 
         //Adding all stacks to the outStack
-        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix);
-        for (String currentStringInStackLineAbove : LineAbove) {
-            out.push(currentStringInStackLineAbove);
+        if(!isTargetLineOnTopEdgeOfMatrix) {
+            Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix);
+            for (String currentStringInStackLineAbove : LineAbove) {
+                out.push(currentStringInStackLineAbove);
+            }
         }
 
         out.push(ExtractIndexOnTheLeftInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnLeftEdgeOfMatrix));
         out.push(ExtractIndexOnTheRightInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnRightEdgeOfMatrix));
 
-        Stack<String> LineBelow = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnBottomEdgeOfMatrix);
+        Stack<String> LineBelow = ExtractLineBelowInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnBottomEdgeOfMatrix);
         for (String currentStringInStackLineBelow : LineBelow) {
             out.push(currentStringInStackLineBelow);
         }
@@ -132,7 +139,7 @@ public class Main {
         }
 
         for (int i = PlaceInLineIndex; i < PlaceInLineIndex+targetsLength; i++) {
-            String currentString = matrix[LineNumber-1][i];
+            String currentString = matrix[LineNumber-1][i]; //TODO: can go out of bounds
 
             if(IsANumber(currentString)){
                 i += currentString.length();
@@ -272,13 +279,13 @@ public class Main {
     }
 
     public static boolean IsASymbol(String str){
+        if (str == null || str.length()!=1){
+            return false;
+        }
         if(str.equals(".")){
             return false;
         }
-        if (str.length()!=1){
-            return false;
-        }
-        if(str.matches("\\d+")){
+        if(IsANumber(str)){
             return false;
         }
         //Symbols can't be dots, longer than one or digits.
