@@ -91,7 +91,7 @@ public class Main {
 
         Stack<String> out = new Stack<>();
 
-        boolean isTargetOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(LineNumber);
+        boolean isTargetOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(PlaceInLineIndex);
         boolean isTargetOnRightEdgeOfMatrix = IsIndexOnRightEdgeOfMatrix(matrix, LineNumber, PlaceInLineIndex);
         boolean isTargetLineOnTopEdgeOfMatrix = IsLineOnTopEdgeOfMatrix(LineNumber);
         boolean isTargetLineOnBottomEdgeOfMatrix = IsLineOnBottomEdgeOfMatrix(LineNumber, matrix);
@@ -99,11 +99,9 @@ public class Main {
         int targetsLength = matrix[LineNumber][PlaceInLineIndex].length();
 
         //Adding all stacks to the outStack
-        if(!isTargetLineOnTopEdgeOfMatrix) {
-            Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix);
-            for (String currentStringInStackLineAbove : LineAbove) {
-                out.push(currentStringInStackLineAbove);
-            }
+        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix);
+        for (String currentStringInStackLineAbove : LineAbove) {
+            out.push(currentStringInStackLineAbove);
         }
 
         out.push(ExtractIndexOnTheLeftInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnLeftEdgeOfMatrix));
@@ -139,7 +137,7 @@ public class Main {
         }
 
         for (int i = PlaceInLineIndex; i < PlaceInLineIndex+targetsLength; i++) {
-            String currentString = matrix[LineNumber-1][i]; //TODO: can go out of bounds
+            String currentString = matrix[LineNumber-1][i];
 
             if(IsANumber(currentString)){
                 i += currentString.length();
@@ -150,7 +148,7 @@ public class Main {
 
         // Top-right diagonal
         if(!isTargetOnRightEdgeOfMatrix){
-            out.push(matrix[LineNumber-1][PlaceInLineIndex+targetsLength]);
+            out.push(matrix[LineNumber-1][PlaceInLineIndex+targetsLength-1]);
         }
 
         return out;
@@ -203,7 +201,7 @@ public class Main {
 
         // Extracts bottom-right diagonal
         if(!isTargetOnRightEdgeOfMatrix){
-            out.push(matrix[LineNumber+1][PlaceInLineIndex+targetsLength]);
+            out.push(matrix[LineNumber+1][PlaceInLineIndex+targetsLength-1]);
         }
 
         return out;
@@ -329,10 +327,7 @@ public class Main {
         // If supplied the x coordinate of either "$", "*" or "-" the method would return True,
         // and False for any of the following: "#", "@", "%", "1", "=", "+"
 
-        if(placeInLine == 0){
-            return true;
-        }
-        return false;
+        return placeInLine == 0;
     }
     public static boolean IsIndexOnRightEdgeOfMatrix(String[][] matrix, int LineNumber, int placeInLine){
         // Determines if a specific item is on the right end of a line in a matrix.
