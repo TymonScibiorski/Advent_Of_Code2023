@@ -96,10 +96,15 @@ public class MainTest {
                 {"-", "=", "+"}
         };
         Stack<String> expectedStack = new Stack<>();
+        expectedStack.push("+");
+        expectedStack.push("-");
+        expectedStack.push("=");
+        expectedStack.push("@");
+        expectedStack.push("*");
         expectedStack.push("1");
         expectedStack.push(".");
         expectedStack.push("$");
-        Stack<String> actualStack = Main.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
+        Stack<String> actualStack = Main.ExtractSurroundings(matrix, 1, 1);
         boolean forAssertion0 = true;
 
         for(String currentStringFromExpectedStack : expectedStack){
@@ -131,6 +136,76 @@ public class MainTest {
             }
         }
         Assert.assertTrue(forAssertion1);
+    }
+
+    @Test
+    public void TestExtractLineAboveInMatrix() {
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Stack<String> expectedStack = new Stack<>();
+        expectedStack.push("1");
+        expectedStack.push(".");
+        expectedStack.push("$");
+        Stack<String> actualStack = Main.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
+        boolean forAssertion0 = true;
+
+        for (String currentStringFromExpectedStack : expectedStack) {
+            String currentStringFromActualStack = actualStack.pop();
+            if (!currentStringFromExpectedStack.equals(currentStringFromActualStack)) {
+                forAssertion0 = false;
+                break;
+            }
+        }
+        Assert.assertTrue(forAssertion0);
+
+        String[][] matrix1 = {
+                {"$", "46", "1"},
+                {"*", ".", "@", "5"},
+                {"-", "=", "+", "."}
+        };
+        Stack<String> expectedStack1 = new Stack<>();
+        expectedStack.push("1");
+        expectedStack.push("46");
+        expectedStack.push("$");
+        Stack<String> actualStack1 = Main.ExtractLineAboveInMatrix(matrix1, 1, 1, 1, false, false, false);
+        boolean forAssertion1 = true;
+
+        for (String currentStringFromExpectedStack : expectedStack1) {
+            String currentStringFromActualStack = actualStack1.pop();
+            if (!currentStringFromExpectedStack.equals(currentStringFromActualStack)) {
+                forAssertion1 = false;
+                break;
+            }
+        }
+        Assert.assertTrue(forAssertion1);
+    }
+
+    @Test
+    public void TestExtractTopLeftDiagonalInMatrix() {
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Assert.assertEquals("$", Main.ExtractTopLeftDiagonalInMatrix(matrix, 1, 1, false, false));
+        Assert.assertNull(Main.ExtractTopLeftDiagonalInMatrix(matrix, 0, 1, false, true));
+        Assert.assertNull(Main.ExtractTopLeftDiagonalInMatrix(matrix, 1, 0, true, false));
+
+    }
+
+    @Test
+    public void TestExtractTopRightDiagonalInMatrix() {
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Assert.assertEquals("1", Main.ExtractTopRightDiagonalInMatrix(matrix, 1, 1, false, false));
+        Assert.assertNull(Main.ExtractTopRightDiagonalInMatrix(matrix, 0, 1, false, true));
+        Assert.assertNull(Main.ExtractTopRightDiagonalInMatrix(matrix, 1, 2, true, false));
     }
 
     @Test
@@ -173,51 +248,6 @@ public class MainTest {
         Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 2, 2, true));
     }
 
-    @Test
-    public void TestExtractLineAboveInMatrix(){
-        String[][] matrix = {
-                {"$", ".", "1"},
-                {"*", ".", "@"},
-                {"-", "=", "+"}
-        };
-        Stack<String> expectedStack = new Stack<>();
-        expectedStack.push("1");
-        expectedStack.push(".");
-        expectedStack.push("$");
-        Stack<String> actualStack = Main.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
-        boolean forAssertion0 = true;
-
-        for(String currentStringFromExpectedStack : expectedStack){
-            String currentStringFromActualStack = actualStack.pop();
-            if(!currentStringFromExpectedStack.equals(currentStringFromActualStack)){
-                forAssertion0 = false;
-                break;
-            }
-        }
-        Assert.assertTrue(forAssertion0);
-
-        String[][] matrix1 = {
-                {"$", "46", "1"},
-                {"*", ".", "@", "5"},
-                {"-", "=", "+", "."}
-        };
-        Stack<String> expectedStack1 = new Stack<>();
-        expectedStack.push("1");
-        expectedStack.push("46");
-        expectedStack.push("$");
-        Stack<String> actualStack1 = Main.ExtractLineAboveInMatrix(matrix1, 1, 1, 1, false, false, false);
-        boolean forAssertion1 = true;
-
-        for(String currentStringFromExpectedStack : expectedStack1){
-            String currentStringFromActualStack = actualStack1.pop();
-            if(!currentStringFromExpectedStack.equals(currentStringFromActualStack)){
-                forAssertion1 = false;
-                break;
-            }
-        }
-        Assert.assertTrue(forAssertion1);
-
-    }
 
     @Test
     public void TestRawInputLineToStrArray(){

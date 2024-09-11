@@ -127,19 +127,13 @@ public class Main {
         // Returns a stack containing: 1, 46, $
         Stack<String> out = new Stack<>();
 
-        if(isTargetLineOnTopEdgeOfMatrix){
-            return out;
-        }
-
         // Top-left diagonal
-        if(!isTargetOnLeftEdgeOfMatrix){
-            out.push(matrix[LineNumber-1][PlaceInLineIndex-1]);
-        }
+        out.push(ExtractTopLeftDiagonalInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnLeftEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix));
 
         for (int i = PlaceInLineIndex; i < PlaceInLineIndex+targetsLength; i++) {
             String currentString = matrix[LineNumber-1][i];
 
-            if(IsANumber(currentString)){
+            if(IsANumber(currentString)){ // If the string under inspection is a number,
                 i += currentString.length();
             }
 
@@ -147,11 +141,23 @@ public class Main {
         }
 
         // Top-right diagonal
-        if(!isTargetOnRightEdgeOfMatrix){
-            out.push(matrix[LineNumber-1][PlaceInLineIndex+targetsLength-1]);
-        }
+        out.push(ExtractTopRightDiagonalInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix));
 
         return out;
+    }
+
+    public static String ExtractTopLeftDiagonalInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnLeftEdgeOfMatrix, boolean isTargetOnTopEdgeOfMatrix){
+        if(isTargetOnLeftEdgeOfMatrix || isTargetOnTopEdgeOfMatrix){
+            return null;
+        }
+        return matrix[LineNumber-1][PlaceInLineIndex-1];
+    }
+
+    public static String ExtractTopRightDiagonalInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnRightEdgeOfMatrix, boolean isTargetOnTopEdgeOfMatrix){
+        if(isTargetOnRightEdgeOfMatrix || isTargetOnTopEdgeOfMatrix){
+            return null;
+        }
+        return matrix[LineNumber-1][PlaceInLineIndex+1];
     }
 
     public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnLeftEdgeOfMatrix){
@@ -201,7 +207,7 @@ public class Main {
 
         // Extracts bottom-right diagonal
         if(!isTargetOnRightEdgeOfMatrix){
-            out.push(matrix[LineNumber+1][PlaceInLineIndex+targetsLength-1]);
+            out.push(matrix[LineNumber+1][PlaceInLineIndex+targetsLength]);
         }
 
         return out;
