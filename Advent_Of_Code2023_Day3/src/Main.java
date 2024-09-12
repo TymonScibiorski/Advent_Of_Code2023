@@ -1,4 +1,3 @@
-import javax.sound.sampled.Line;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,8 +9,8 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //  The IsAPartNumber method is not functioning properly, which must be because of the ExtractSurroundings method.
-    //  TODO: To the ExtractSurroundings method: tests to be added, problem to be figured out.
+    //  The IsAPartNumber method is not functioning properly, which must be because of the ExtractSurroundings.ExtractSurroundings method.
+    //  TODO: To the ExtractSurroundings.ExtractSurroundings method: tests to be added, problem to be figured out.
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
@@ -62,7 +61,7 @@ public class Main {
         // by checking if it is adjacent to a symbol with the IsASymbol method.
         // As input, it takes the matrix and the number's coordinates.
 
-        Stack<String> Surroundings = ExtractSurroundings(matrix, NumbersLine, NumbersPlaceInLine);
+        Stack<String> Surroundings = ExtractSurroundings.ExtractSurroundings(matrix, NumbersLine, NumbersPlaceInLine);
 
         if(!IsANumber(matrix[NumbersLine][NumbersPlaceInLine])){
             // If the target is not a number it cannot be a partNumber
@@ -77,141 +76,7 @@ public class Main {
 
         return false;
     }
-
-
-    public static Stack<String> ExtractSurroundings(String[][] matrix, int LineNumber, int PlaceInLineIndex){
-        //This function extracts strings surrounding a provided coordinate in a matrix
-        //Example:
-        // matrix = {
-        //      {"$", "#", "@"},
-        //      {"*", "1", "%"},
-        //      {"-", "=", "+"}
-        //        };
-        // A stack containing the following strings would be returned: "$", "#", "@", "*", "%", "-", "=", "+"
-
-        Stack<String> out = new Stack<>();
-
-        boolean isTargetOnLeftEdgeOfMatrix = IsIndexOnLeftEdgeOfMatrix(PlaceInLineIndex);
-        boolean isTargetOnRightEdgeOfMatrix = IsIndexOnRightEdgeOfMatrix(matrix, LineNumber, PlaceInLineIndex);
-        boolean isTargetLineOnTopEdgeOfMatrix = IsLineOnTopEdgeOfMatrix(LineNumber);
-        boolean isTargetLineOnBottomEdgeOfMatrix = IsLineOnBottomEdgeOfMatrix(LineNumber, matrix);
-
-        int targetsLength = matrix[LineNumber][PlaceInLineIndex].length();
-
-        //Adding all stacks to the outStack
-        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix);
-        for (String currentStringInStackLineAbove : LineAbove) {
-            out.push(currentStringInStackLineAbove);
-        }
-
-        out.push(ExtractIndexOnTheLeftInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnLeftEdgeOfMatrix));
-        out.push(ExtractIndexOnTheRightInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnRightEdgeOfMatrix));
-
-        Stack<String> LineBelow = ExtractLineBelowInMatrix(matrix, LineNumber, PlaceInLineIndex, targetsLength, isTargetOnLeftEdgeOfMatrix, isTargetOnRightEdgeOfMatrix, isTargetLineOnBottomEdgeOfMatrix);
-        for (String currentStringInStackLineBelow : LineBelow) {
-            out.push(currentStringInStackLineBelow);
-        }
-        
-
-        return out;
-    }
-
-    public static Stack<String> ExtractLineAboveInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, int targetsLength, boolean isTargetOnLeftEdgeOfMatrix, boolean isTargetOnRightEdgeOfMatrix, boolean isTargetLineOnTopEdgeOfMatrix){
-        // Extracts contents that are directly above and diagonally to the top-right and top-left to a certain target.
-        // Example:
-//        String[][] matrix1 = {
-//                {"$", "46", "1"},
-//                {"*", ".", "@", "5"},
-//                {"-", "=", "+", "."}
-//        };
-        // Returns a stack containing: 1, 46, $
-        Stack<String> out = new Stack<>();
-
-        // Top-left diagonal
-        out.push(ExtractTopLeftDiagonalInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnLeftEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix));
-
-        for (int i = PlaceInLineIndex; i < PlaceInLineIndex+targetsLength; i++) {
-            String currentString = matrix[LineNumber-1][i];
-
-            if(IsANumber(currentString)){ // If the string under inspection is a number,
-                i += currentString.length();
-            }
-
-            out.push(currentString);
-        }
-
-        // Top-right diagonal
-        out.push(ExtractTopRightDiagonalInMatrix(matrix, LineNumber, PlaceInLineIndex, isTargetOnRightEdgeOfMatrix, isTargetLineOnTopEdgeOfMatrix));
-
-        return out;
-    }
-
-    public static String ExtractTopLeftDiagonalInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnLeftEdgeOfMatrix, boolean isTargetOnTopEdgeOfMatrix){
-        if(isTargetOnLeftEdgeOfMatrix || isTargetOnTopEdgeOfMatrix){
-            return null;
-        }
-        return matrix[LineNumber-1][PlaceInLineIndex-1];
-    }
-
-    public static String ExtractTopRightDiagonalInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnRightEdgeOfMatrix, boolean isTargetOnTopEdgeOfMatrix){
-        if(isTargetOnRightEdgeOfMatrix || isTargetOnTopEdgeOfMatrix){
-            return null;
-        }
-        return matrix[LineNumber-1][PlaceInLineIndex+1];
-    }
-
-    public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnLeftEdgeOfMatrix){
-        if(!isTargetOnLeftEdgeOfMatrix){
-            return matrix[LineNumber][PlaceInLineIndex-1];
-        }
-        return null;
-    }
-
-    public static String ExtractIndexOnTheRightInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, boolean isTargetOnRightEdgeOfMatrix){
-        if(!isTargetOnRightEdgeOfMatrix){
-            return matrix[LineNumber][PlaceInLineIndex+1];
-        }
-        return null;
-    }
-
-    public static Stack<String> ExtractLineBelowInMatrix(String[][] matrix, int LineNumber, int PlaceInLineIndex, int targetsLength, boolean isTargetOnLeftEdgeOfMatrix, boolean isTargetOnRightEdgeOfMatrix, boolean isTargetLineOnBottomEdgeOfMatrix){
-        // Extracts contents that are directly above and diagonally to the top-right and top-left to a certain target.
-        // Example:
-//        String[][] matrix1 = {
-//                {"$", "46", "1"},
-//                {"*", ".", "@", "5"},
-//                {"-", "=", "+", "."}
-//        };
-        // Returns a stack containing: 1, 46, $
-        Stack<String> out = new Stack<>();
-
-        if(isTargetLineOnBottomEdgeOfMatrix){
-            return out;
-        }
-
-        // Extracts bottom-left diagonal
-        if(!isTargetOnLeftEdgeOfMatrix){
-            out.push(matrix[LineNumber+1][PlaceInLineIndex-1]);
-        }
-
-        // Extracts directly beneath the entire target's length
-        for (int i = PlaceInLineIndex; i < PlaceInLineIndex+targetsLength; i++) {
-            String currentString = matrix[LineNumber+1][i];
-
-            if(IsANumber(currentString)){
-                i += currentString.length();
-            }
-
-            out.push(currentString);
-        }
-
-        // Extracts bottom-right diagonal
-        if(!isTargetOnRightEdgeOfMatrix){
-            out.push(matrix[LineNumber+1][PlaceInLineIndex+targetsLength]);
-        }
-
-        return out;
-    }
+    
 
     public static String[] RawInputLineToStrArray(String line){
         // This method takes a line and returns an array that will be usable by the code.
@@ -333,7 +198,7 @@ public class Main {
         // If supplied the x coordinate of either "$", "*" or "-" the method would return True,
         // and False for any of the following: "#", "@", "%", "1", "=", "+"
 
-        return placeInLine == 0;
+        return placeInLine > 0;
     }
     public static boolean IsIndexOnRightEdgeOfMatrix(String[][] matrix, int LineNumber, int placeInLine){
         // Determines if a specific item is on the right end of a line in a matrix.

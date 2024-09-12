@@ -96,19 +96,20 @@ public class MainTest {
                 {"-", "=", "+"}
         };
         Stack<String> expectedStack = new Stack<>();
-        expectedStack.push("+");
+        expectedStack.push("$");
+        expectedStack.push(".");
+        expectedStack.push("1");
+        expectedStack.push("*");
+        expectedStack.push("@");
         expectedStack.push("-");
         expectedStack.push("=");
-        expectedStack.push("@");
-        expectedStack.push("*");
-        expectedStack.push("1");
-        expectedStack.push(".");
-        expectedStack.push("$");
-        Stack<String> actualStack = Main.ExtractSurroundings(matrix, 1, 1);
+        expectedStack.push("+");
+        Stack<String> actualStack = ExtractSurroundings.ExtractSurroundings(matrix, 1, 1);
         boolean forAssertion0 = true;
 
-        for(String currentStringFromExpectedStack : expectedStack){
+        for(int i = 0; i < expectedStack.size(); i++){
             String currentStringFromActualStack = actualStack.pop();
+            String currentStringFromExpectedStack = expectedStack.pop();
             if(!currentStringFromExpectedStack.equals(currentStringFromActualStack)){
                 forAssertion0 = false;
                 break;
@@ -122,14 +123,19 @@ public class MainTest {
                 {"-", "=", "+", "."}
         };
         Stack<String> expectedStack1 = new Stack<>();
-        expectedStack.push("1");
-        expectedStack.push("46");
         expectedStack.push("$");
-        Stack<String> actualStack1 = Main.ExtractLineAboveInMatrix(matrix1, 1, 1, 1, false, false, false);
+        expectedStack.push("46");
+        expectedStack.push("*");
+        expectedStack.push("@");
+        expectedStack.push("-");
+        expectedStack.push("=");
+        expectedStack.push("+");
+        Stack<String> actualStack1 = ExtractSurroundings.ExtractSurroundings(matrix1, 1, 1);
         boolean forAssertion1 = true;
 
-        for(String currentStringFromExpectedStack : expectedStack1){
+        for(int i = 0; i < expectedStack1.size(); i++){
             String currentStringFromActualStack = actualStack1.pop();
+            String currentStringFromExpectedStack = expectedStack1.pop();
             if(!currentStringFromExpectedStack.equals(currentStringFromActualStack)){
                 forAssertion1 = false;
                 break;
@@ -149,7 +155,7 @@ public class MainTest {
         expectedStack.push("1");
         expectedStack.push(".");
         expectedStack.push("$");
-        Stack<String> actualStack = Main.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
+        Stack<String> actualStack = ExtractSurroundings.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
         boolean forAssertion0 = true;
 
         for (String currentStringFromExpectedStack : expectedStack) {
@@ -170,7 +176,7 @@ public class MainTest {
         expectedStack.push("1");
         expectedStack.push("46");
         expectedStack.push("$");
-        Stack<String> actualStack1 = Main.ExtractLineAboveInMatrix(matrix1, 1, 1, 1, false, false, false);
+        Stack<String> actualStack1 = ExtractSurroundings.ExtractLineAboveInMatrix(matrix1, 1, 1, 1, false, false, false);
         boolean forAssertion1 = true;
 
         for (String currentStringFromExpectedStack : expectedStack1) {
@@ -190,9 +196,9 @@ public class MainTest {
                 {"*", ".", "@"},
                 {"-", "=", "+"}
         };
-        Assert.assertEquals("$", Main.ExtractTopLeftDiagonalInMatrix(matrix, 1, 1, false, false));
-        Assert.assertNull(Main.ExtractTopLeftDiagonalInMatrix(matrix, 0, 1, false, true));
-        Assert.assertNull(Main.ExtractTopLeftDiagonalInMatrix(matrix, 1, 0, true, false));
+        Assert.assertEquals("$", ExtractSurroundings.ExtractTopLeftDiagonalInMatrix(matrix, 1, 1));
+        Assert.assertNull(ExtractSurroundings.ExtractTopLeftDiagonalInMatrix(matrix, 0, 1));
+        Assert.assertNull(ExtractSurroundings.ExtractTopLeftDiagonalInMatrix(matrix, 1, 0));
 
     }
 
@@ -203,9 +209,9 @@ public class MainTest {
                 {"*", ".", "@"},
                 {"-", "=", "+"}
         };
-        Assert.assertEquals("1", Main.ExtractTopRightDiagonalInMatrix(matrix, 1, 1, false, false));
-        Assert.assertNull(Main.ExtractTopRightDiagonalInMatrix(matrix, 0, 1, false, true));
-        Assert.assertNull(Main.ExtractTopRightDiagonalInMatrix(matrix, 1, 2, true, false));
+        Assert.assertEquals("1", ExtractSurroundings.ExtractTopRightDiagonalInMatrix(matrix, 1, 1));
+        Assert.assertNull(ExtractSurroundings.ExtractTopRightDiagonalInMatrix(matrix, 0, 1));
+        Assert.assertNull(ExtractSurroundings.ExtractTopRightDiagonalInMatrix(matrix, 1, 2));
     }
 
     @Test
@@ -215,17 +221,17 @@ public class MainTest {
                 {"36", ".", "@"},
                 {"-", "=", "+"}
         };
-        Assert.assertEquals("$", Main.ExtractIndexOnTheLeftInMatrix(matrix, 0, 1, false));
-        Assert.assertEquals("36", Main.ExtractIndexOnTheLeftInMatrix(matrix, 1, 1, false));
-        Assert.assertEquals("-", Main.ExtractIndexOnTheLeftInMatrix(matrix, 2, 1, false));
+        Assert.assertEquals("$", ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 0, 1));
+        Assert.assertEquals("36", ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 1, 1));
+        Assert.assertEquals("-", ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 2, 1));
 
-        Assert.assertEquals(".", Main.ExtractIndexOnTheLeftInMatrix(matrix, 0, 2, false));
-        Assert.assertEquals(".", Main.ExtractIndexOnTheLeftInMatrix(matrix, 1, 2, false));
-        Assert.assertEquals("=", Main.ExtractIndexOnTheLeftInMatrix(matrix, 2, 2, false));
+        Assert.assertEquals(".", ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 0, 2));
+        Assert.assertEquals(".", ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 1, 2));
+        Assert.assertEquals("=", ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 2, 2));
 
-        Assert.assertEquals(null, Main.ExtractIndexOnTheLeftInMatrix(matrix, 0, 0, true));
-        Assert.assertEquals(null, Main.ExtractIndexOnTheLeftInMatrix(matrix, 1, 0, true));
-        Assert.assertEquals(null, Main.ExtractIndexOnTheLeftInMatrix(matrix, 2, 0, true));
+        Assert.assertEquals(null, ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 0, 0));
+        Assert.assertEquals(null, ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 1, 0));
+        Assert.assertEquals(null, ExtractSurroundings.ExtractIndexOnTheLeftInMatrix(matrix, 2, 0));
     }
 
     @Test
@@ -235,17 +241,17 @@ public class MainTest {
                 {"*", ".", "9"},
                 {"-", "=", "+"}
         };
-        Assert.assertEquals(".", Main.ExtractIndexOnTheRightInMatrix(matrix, 0, 0, false));
-        Assert.assertEquals(".", Main.ExtractIndexOnTheRightInMatrix(matrix, 1, 0, false));
-        Assert.assertEquals("=", Main.ExtractIndexOnTheRightInMatrix(matrix, 2, 0, false));
+        Assert.assertEquals(".", ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 0, 0));
+        Assert.assertEquals(".", ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 1, 0));
+        Assert.assertEquals("=", ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 2, 0));
 
-        Assert.assertEquals("1", Main.ExtractIndexOnTheRightInMatrix(matrix, 0, 1, false));
-        Assert.assertEquals("9", Main.ExtractIndexOnTheRightInMatrix(matrix, 1, 1, false));
-        Assert.assertEquals("+", Main.ExtractIndexOnTheRightInMatrix(matrix, 2, 1, false));
+        Assert.assertEquals("1", ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 0, 1));
+        Assert.assertEquals("9", ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 1, 1));
+        Assert.assertEquals("+", ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 2, 1));
 
-        Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 0, 2, true));
-        Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 1, 2, true));
-        Assert.assertEquals(null, Main.ExtractIndexOnTheRightInMatrix(matrix, 2, 2, true));
+        Assert.assertEquals(null, ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 0, 2));
+        Assert.assertEquals(null, ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 1, 2));
+        Assert.assertEquals(null, ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 2, 2));
     }
 
 
