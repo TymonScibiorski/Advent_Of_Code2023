@@ -10,7 +10,7 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     //  The IsAPartNumber method is not functioning properly, which must be because of the ExtractSurroundings.ExtractSurroundings method.
-    //  TODO: To the ExtractSurroundings.ExtractSurroundings method: tests to be added, problem to be figured out.
+    //  TODO: To the ExtractSurroundings.ExtractSurroundings method: tests to be added, extractors from directly above or below to be fixed.
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();

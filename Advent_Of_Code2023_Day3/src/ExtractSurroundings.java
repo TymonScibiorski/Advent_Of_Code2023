@@ -79,7 +79,7 @@ public class ExtractSurroundings {
         }
         return matrix[lineNumber-1][placeInLineIndex+1];
     }
-    
+
 
     public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
         if(isIndexOnLeftEdgeOfMatrix(placeInLineIndex)){
