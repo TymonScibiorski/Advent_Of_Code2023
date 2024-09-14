@@ -155,7 +155,7 @@ public class MainTest {
         expectedStack.push("1");
         expectedStack.push(".");
         expectedStack.push("$");
-        Stack<String> actualStack = ExtractSurroundings.ExtractLineAboveInMatrix(matrix, 1, 1, 1, false, false, false);
+        Stack<String> actualStack = ExtractSurroundings.ExtractLineAboveInMatrix(matrix, 1, 1, );
         boolean forAssertion0 = true;
 
         for (String currentStringFromExpectedStack : expectedStack) {
@@ -176,7 +176,7 @@ public class MainTest {
         expectedStack.push("1");
         expectedStack.push("46");
         expectedStack.push("$");
-        Stack<String> actualStack1 = ExtractSurroundings.ExtractLineAboveInMatrix(matrix1, 1, 1, 1, false, false, false);
+        Stack<String> actualStack1 = ExtractSurroundings.ExtractLineAboveInMatrix(matrix1, 1, 1, 1);
         boolean forAssertion1 = true;
 
         for (String currentStringFromExpectedStack : expectedStack1) {
