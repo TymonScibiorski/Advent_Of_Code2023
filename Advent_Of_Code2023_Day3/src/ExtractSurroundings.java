@@ -16,7 +16,7 @@ public class ExtractSurroundings {
         int targetsLength = matrix[lineNumber][placeInLineIndex].length();
 
         //Adding all stacks to the outStack
-        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
+        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, lineNumber, placeInLineIndex);
         for (String currentStringInStackLineAbove : LineAbove) {
             out.push(currentStringInStackLineAbove);
         }
@@ -33,7 +33,7 @@ public class ExtractSurroundings {
         return out;
     }
 
-    public static Stack<String> ExtractLineAboveInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
+    public static Stack<String> ExtractLineAboveInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
         // Extracts contents that are directly above and diagonally to the top-right and top-left to a certain target.
         // Example:
 //        String[][] matrix1 = {
@@ -50,14 +50,10 @@ public class ExtractSurroundings {
         // Top-left diagonal, if it exists
         out.push(ExtractTopLeftDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
 
-        for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
-            String currentString = matrix[lineNumber-1][i];
-
-            if(isANumber(currentString)){ // If the string under inspection is a number,
-                i += currentString.length();
-            }
-
-            out.push(currentString);
+        // Directly above
+        Stack<String> directlyAbove = ExtractDirectlyOnTopInMatrix(matrix, lineNumber, placeInLineIndex);
+        for (int i = 0; i < directlyAbove.size(); i++) {
+            out.push(directlyAbove.pop());
         }
 
         // Top-right diagonal, if it exists
@@ -73,12 +69,33 @@ public class ExtractSurroundings {
         return matrix[lineNumber-1][placeInLineIndex-1];
     }
 
+    public static Stack<String> ExtractDirectlyOnTopInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
+        Stack<String> out = new Stack<>();
+        int targetsLength = matrix[lineNumber][placeInLineIndex].length();
+
+        for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
+            if(isIndexOnLeftEdgeOfMatrix(i) || isIndexOnRightEdgeOfMatrix(matrix, lineNumber-1, i)){
+                continue;
+            }
+            String currentString = matrix[lineNumber-1][i];
+
+            if(isANumber(currentString)){ // If the string under inspection is a number,
+                i += currentString.length();
+            }
+
+            out.push(currentString);
+        }
+
+        return out;
+    }
+
     public static String ExtractTopRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
         if(isIndexOnRightEdgeOfMatrix(matrix, lineNumber-1, placeInLineIndex)){
             return null;
         }
         return matrix[lineNumber-1][placeInLineIndex+1];
     }
+
 
 
     public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){

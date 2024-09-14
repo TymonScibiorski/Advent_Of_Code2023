@@ -155,7 +155,7 @@ public class MainTest {
         expectedStack.push("1");
         expectedStack.push(".");
         expectedStack.push("$");
-        Stack<String> actualStack = ExtractSurroundings.ExtractLineAboveInMatrix(matrix, 1, 1, );
+        Stack<String> actualStack = ExtractSurroundings.ExtractLineAboveInMatrix(matrix, 1, 1);
         boolean forAssertion0 = true;
 
         for (String currentStringFromExpectedStack : expectedStack) {
@@ -176,7 +176,7 @@ public class MainTest {
         expectedStack.push("1");
         expectedStack.push("46");
         expectedStack.push("$");
-        Stack<String> actualStack1 = ExtractSurroundings.ExtractLineAboveInMatrix(matrix1, 1, 1, 1);
+        Stack<String> actualStack1 = ExtractSurroundings.ExtractLineAboveInMatrix(matrix1, 1, 1);
         boolean forAssertion1 = true;
 
         for (String currentStringFromExpectedStack : expectedStack1) {
@@ -199,6 +199,30 @@ public class MainTest {
         Assert.assertEquals("$", ExtractSurroundings.ExtractTopLeftDiagonalInMatrix(matrix, 1, 1));
         Assert.assertNull(ExtractSurroundings.ExtractTopLeftDiagonalInMatrix(matrix, 0, 1));
         Assert.assertNull(ExtractSurroundings.ExtractTopLeftDiagonalInMatrix(matrix, 1, 0));
+    }
+
+    @Test
+    public void TestExtractDirectlyOnTopInMatrix(){
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "@"},
+                {"-", "=", "+"}
+        };
+        Stack<String> expectedStack = new Stack<>();
+        expectedStack.push("1");
+        expectedStack.push(".");
+        expectedStack.push("$");
+        Stack<String> actualStack = ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 1, 1);
+        boolean forAssertion0 = true;
+
+        for (String currentStringFromExpectedStack : expectedStack) {
+            String currentStringFromActualStack = actualStack.pop();
+            if (!currentStringFromExpectedStack.equals(currentStringFromActualStack)) {
+                forAssertion0 = false;
+                break;
+            }
+        }
+        Assert.assertTrue(forAssertion0);
 
     }
 
