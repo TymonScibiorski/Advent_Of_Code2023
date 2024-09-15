@@ -63,23 +63,32 @@ public class ExtractSurroundings {
     }
 
     public static String ExtractTopLeftDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(isIndexOnLeftEdgeOfMatrix(placeInLineIndex-1)){
+        if(!isIndexInBoundsOfMatrix(matrix, lineNumber-1, placeInLineIndex-1)){
             return null;
         }
         return matrix[lineNumber-1][placeInLineIndex-1];
     }
 
     public static Stack<String> ExtractDirectlyOnTopInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
+        // Extracts directly above the target string.
+        // Example:
+//        String[][] matrix = {
+//                {"$", ".", "1"},
+//                {"*", ".", "@"},
+//                {"-", "=", "+"}
+//        };
+        // For index 1, 1 the output Stack will contain ".". For index 0,2 the output Stack will contain null
         Stack<String> out = new Stack<>();
         int targetsLength = matrix[lineNumber][placeInLineIndex].length();
 
         for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
-            if(isIndexOnLeftEdgeOfMatrix(i) || isIndexOnRightEdgeOfMatrix(matrix, lineNumber-1, i)){
+            if(!isIndexInBoundsOfMatrix(matrix, lineNumber-1, i)){
+                out.push(null);
                 continue;
             }
             String currentString = matrix[lineNumber-1][i];
 
-            if(isANumber(currentString)){ // If the string under inspection is a number,
+            if(isANumber(currentString)){ // If the string under inspection is a number, then the code should skip ahead the number's length
                 i += currentString.length();
             }
 
@@ -220,5 +229,9 @@ public class ExtractSurroundings {
     public static boolean isLineOnBottomEdgeOfMatrix(int lineNumber, String[][] matrix){
         // Returns true if a line is on the bottom edge of a matrix, which is true only when it's matching the matrix's length (- one, because of how it's counted).
         return lineNumber >= (matrix.length - 1);
+    }
+
+    public static boolean isIndexInBoundsOfMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
+        return (placeInLineIndex >= 0 && lineNumber >= 0 && lineNumber < matrix.length && placeInLineIndex < matrix[lineNumber].length);
     }
 }

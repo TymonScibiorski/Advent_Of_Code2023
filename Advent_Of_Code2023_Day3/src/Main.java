@@ -10,7 +10,14 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     //  The IsAPartNumber method is not functioning properly, which must be because of the ExtractSurroundings.ExtractSurroundings method.
-    //  TODO: To the ExtractSurroundings.ExtractSurroundings method: tests to be added, extractors from directly above or below to be fixed.
+    //  TODO: To the ExtractSurroundings.ExtractSurroundings method: ExtractLineAbove method is not working, because the directlyAbove method and Top-RightDiagonal are not working together.
+    //  In the example below it would 'reach' and also include an extra string:
+//    String[][] matrix1 = {
+//            {"$", "46", "1"},
+//            {"*", ".", "@", "5"},
+//            {"-", "=", "+", "."}
+//    };
+    // for ExtractLineAboveMethod, for coordinates 1,1 the string "1" on the position 0,2 would be included, which couldn't be, because everything that's above 1,1 is "$" and "46"
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
