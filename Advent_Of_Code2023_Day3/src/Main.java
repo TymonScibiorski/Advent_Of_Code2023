@@ -18,6 +18,7 @@ public class Main {
 //            {"-", "=", "+", "."}
 //    };
     // for ExtractLineAboveMethod, for coordinates 1,1 the string "1" on the position 0,2 would be included, which couldn't be, because everything that's above 1,1 is "$" and "46"
+    // Maybe the directlyAbove method would return also the "i" variable, and if it's greater than target's length than the ExtractTop-RightDiagonal method would not execute?
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
