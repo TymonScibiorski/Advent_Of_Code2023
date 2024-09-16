@@ -238,6 +238,17 @@ public class MainTest {
     }
 
     @Test
+    public void TestExecuteExtractTopRightDiagonalInMatrix(){
+        String[][] matrix = {
+                {"$", "46", "1"},
+                {"*", ".", "@", "5"},
+                {"-", "=", "+", "."}
+        };
+        Assert.assertFalse(ExtractSurroundings.executeExtractTopRightDiagonalInMatrix(matrix, 1, 1));
+        Assert.assertTrue(ExtractSurroundings.executeExtractTopRightDiagonalInMatrix(matrix, 2, 0));
+    }
+
+    @Test
     public void TestExtractTopRightDiagonalInMatrix() {
         String[][] matrix = {
                 {"$", ".", "1"},

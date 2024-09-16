@@ -57,7 +57,10 @@ public class ExtractSurroundings {
         }
 
         // Top-right diagonal, if it exists
-        out.push(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
+
+        if(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex) != null){
+            out.push(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
+        }
 
         return out;
     }
@@ -98,8 +101,31 @@ public class ExtractSurroundings {
         return out;
     }
 
+    public static boolean executeExtractTopRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
+        int targetsLength = matrix[lineNumber][placeInLineIndex].length();
+
+        for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
+            if(!isIndexInBoundsOfMatrix(matrix, lineNumber-1, i)){
+                continue;
+            }
+            String currentString = matrix[lineNumber-1][i];
+
+            if(isANumber(currentString)){ // If the string under inspection is a number, then the code should skip ahead the number's length
+                i += currentString.length();
+            }
+
+            if(i == (placeInLineIndex+targetsLength+1)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static String ExtractTopRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(isIndexOnRightEdgeOfMatrix(matrix, lineNumber-1, placeInLineIndex)){
+        boolean shouldBeExecuted = executeExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex);
+        boolean isInBounds = isIndexInBoundsOfMatrix(matrix, lineNumber - 1, placeInLineIndex + 1);
+        if(!isInBounds || !shouldBeExecuted){
             return null;
         }
         return matrix[lineNumber-1][placeInLineIndex+1];
