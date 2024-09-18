@@ -182,7 +182,7 @@ public class ExtractSurroundings {
 
 
     public static String ExtractBottomLeftDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(isIndexOnLeftEdgeOfMatrix(placeInLineIndex-1)){
+        if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, placeInLineIndex-1)){
             return null;
         }
         return matrix[lineNumber+1][placeInLineIndex-1];
