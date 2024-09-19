@@ -222,7 +222,7 @@ public class ExtractSurroundings {
                 i += currentString.length();
             }
 
-            if(i == (placeInLineIndex+targetsLength+1)){
+            if(i == (placeInLineIndex+targetsLength+1)){ //if i is equal to placeInLineIndex+targetsLength+1 it must've done the ExtractBottomRight's job
                 return false;
             }
         }
@@ -231,7 +231,7 @@ public class ExtractSurroundings {
     }
 
     public static String ExtractBottomRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, placeInLineIndex) || !executeExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex)){
+        if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, placeInLineIndex+1) || !executeExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex)){
             return null;
         }
         return matrix[lineNumber+1][placeInLineIndex+1];

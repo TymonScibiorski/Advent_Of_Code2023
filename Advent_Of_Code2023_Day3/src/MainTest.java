@@ -299,6 +299,7 @@ public class MainTest {
         Assert.assertNull(null, ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 1, 2));
         Assert.assertNull(null, ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 2, 2));
     }
+    
 
     @Test
     public void TestExtractBottomLeftDiagonalInMatrix(){
@@ -315,6 +316,24 @@ public class MainTest {
         Assert.assertNull(ExtractSurroundings.ExtractBottomLeftDiagonalInMatrix(matrix, 2, 0));
         Assert.assertNull(ExtractSurroundings.ExtractBottomLeftDiagonalInMatrix(matrix, 2, 1));
         Assert.assertNull(ExtractSurroundings.ExtractBottomLeftDiagonalInMatrix(matrix, 2, 2));
+    }
+
+    @Test
+    public void TestExtractBottomRightDiagonalInMatrix(){
+        String[][] matrix = {
+                {"$", ".", "1"},
+                {"*", ".", "9"},
+                {"-", "=", "+"}
+        };
+        Assert.assertEquals(".",ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 0, 0));
+        Assert.assertEquals("9",ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 0, 1));
+        Assert.assertEquals("=",ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 1, 0));
+        Assert.assertEquals("+",ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 1, 1));
+        Assert.assertNull(ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 0, 2));
+        Assert.assertNull(ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 1, 2));
+        Assert.assertNull(ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 2, 0));
+        Assert.assertNull(ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 2, 1));
+        Assert.assertNull(ExtractSurroundings.ExtractBottomRightDiagonalInMatrix(matrix, 2, 2));
     }
 
 
