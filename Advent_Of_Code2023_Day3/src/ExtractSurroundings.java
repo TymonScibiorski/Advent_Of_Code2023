@@ -1,4 +1,3 @@
-import javax.sound.sampled.Line;
 import java.util.Stack;
 
 public class ExtractSurroundings {
@@ -18,7 +17,8 @@ public class ExtractSurroundings {
 
         //Adding all stacks to the outStack
         Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, lineNumber, placeInLineIndex);
-        for (int i = 0; i < LineAbove.size(); i++) {
+        int lineAboveSize = LineAbove.size(); // This variable has to be declared, because if the "LineAbove.size()" was put raw into the for loop then the value, size, would change dynamically
+        for (int i = 0; i < lineAboveSize; i++) {
             out.push(LineAbove.pop());
         }
 
@@ -26,7 +26,8 @@ public class ExtractSurroundings {
         out.push(ExtractIndexOnTheRightInMatrix(matrix, lineNumber, placeInLineIndex));
 
         Stack<String> LineBelow = ExtractLineBelowInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
-        for (int i = 0 ; i < LineBelow.size(); i++) {
+        int lineBelowSize = LineBelow.size(); // This variable has to be declared, because if the "LineBelow.size()" was put raw into the for loop then the value, size, would change dynamically
+        for (int i = 0 ; i < lineBelowSize; i++) {
             out.push(LineBelow.pop());
         }
 
@@ -174,7 +175,7 @@ public class ExtractSurroundings {
 
         // Bottom-right diagonal, if it exists
         if(ExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex) != null){
-            out.push(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
+            out.push(ExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
         }
 
         return out;
