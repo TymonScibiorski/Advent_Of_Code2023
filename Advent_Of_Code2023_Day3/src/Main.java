@@ -9,9 +9,10 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //TODO: ExtractSurroundings method has problems with lineBelowExtraction, because during rewriting in the ExtractSurroundings method LineAbove.size() changes dynamically
+    //TODO: ExtractSurroundings: ExtractIndexOnTheLeftInMatrix (and Right) have been changed and nothing works now
+    
 
-        public static int FinalFunctionForPartOne(){
+    public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
         ArrayList <Integer> ArrayOfValidNumbers = new ArrayList<>();
 

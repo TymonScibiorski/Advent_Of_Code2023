@@ -79,12 +79,20 @@ public class MainTest {
         );
 
         String[][] matrix6 = {
+                {".", "423", "."},
+                {".", ".", ".", ".", "%"}
+        };
+        Assert.assertTrue(
+                Main.IsAPartNumber(matrix6, 0, 1)
+        );
+
+        String[][] matrix7 = {
                 {"$", ".", "1"},
                 {"*", ".", "@"},
                 {"-", "=", "+"}
         };
         Assert.assertTrue(
-                Main.IsAPartNumber(matrix6, 0, 2)
+                Main.IsAPartNumber(matrix7, 0, 2)
         );
     }
 
@@ -142,6 +150,31 @@ public class MainTest {
             }
         }
         Assert.assertTrue(forAssertion1);
+
+        String[][] matrix3 = {
+                {".", "423", "."},
+                {".", ".", ".", ".", "%"}
+        };
+        Stack<String> expectedStack2 = new Stack<>();
+        expectedStack2.push(".");
+        expectedStack2.push(".");
+        expectedStack2.push("%");
+        expectedStack2.push(".");
+        expectedStack2.push(".");
+        expectedStack2.push(".");
+        expectedStack2.push(".");
+        Stack<String> actualStack2 = ExtractSurroundings.ExtractSurroundings(matrix3, 0, 1);
+        boolean forAssertion2 = true;
+
+        for(int i = 0; i < expectedStack1.size(); i++){
+            String currentStringFromActualStack = actualStack2.pop();
+            String currentStringFromExpectedStack = expectedStack1.pop();
+            if(!currentStringFromExpectedStack.equals(currentStringFromActualStack)){
+                forAssertion2 = false;
+                break;
+            }
+        }
+        Assert.assertTrue(forAssertion2);
     }
 
     @Test

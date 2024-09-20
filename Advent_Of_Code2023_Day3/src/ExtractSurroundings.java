@@ -136,14 +136,14 @@ public class ExtractSurroundings {
 
 
     public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(!isIndexOnLeftEdgeOfMatrix(placeInLineIndex)){
+        if(!isIndexInBoundsOfMatrix(matrix, lineNumber, placeInLineIndex-1)){
             return matrix[lineNumber][placeInLineIndex-1];
         }
         return null;
     }
 
     public static String ExtractIndexOnTheRightInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(!isIndexOnRightEdgeOfMatrix(matrix, lineNumber, placeInLineIndex)){
+        if(!isIndexInBoundsOfMatrix(matrix, lineNumber, placeInLineIndex+1)){
             return matrix[lineNumber][placeInLineIndex+1];
         }
         return null;
