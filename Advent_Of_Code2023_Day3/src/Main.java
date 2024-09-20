@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //TODO: ExtractSurroundings method has problems with lineBelowExtraction
+    //TODO: ExtractSurroundings method has problems with lineBelowExtraction, because during rewriting in the ExtractSurroundings method LineAbove.size() changes dynamically
 
         public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
