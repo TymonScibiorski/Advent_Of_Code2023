@@ -12,23 +12,29 @@ public class ExtractSurroundings {
         // A stack containing the following strings would be returned: "$", "#", "@", "*", "%", "-", "=", "+"
 
         Stack<String> out = new Stack<>();
-        
         int targetsLength = matrix[lineNumber][placeInLineIndex].length();
 
         //Adding all stacks to the outStack
+        //Adding the extracted surroundings from the line above the target
         Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, lineNumber, placeInLineIndex);
         int lineAboveSize = LineAbove.size(); // This variable has to be declared, because if the "LineAbove.size()" was put raw into the for loop then the value, size, would change dynamically
         for (int i = 0; i < lineAboveSize; i++) {
-            out.push(LineAbove.pop());
+            if(LineAbove.peek() != null) {
+                out.push(LineAbove.pop());
+            }
         }
 
+        //Adding the extracted surroundings from the left and right of the target
         out.push(ExtractIndexOnTheLeftInMatrix(matrix, lineNumber, placeInLineIndex));
         out.push(ExtractIndexOnTheRightInMatrix(matrix, lineNumber, placeInLineIndex));
 
+        //Adding the extracted surroundings from the line below the target
         Stack<String> LineBelow = ExtractLineBelowInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
         int lineBelowSize = LineBelow.size(); // This variable has to be declared, because if the "LineBelow.size()" was put raw into the for loop then the value, size, would change dynamically
         for (int i = 0 ; i < lineBelowSize; i++) {
-            out.push(LineBelow.pop());
+            if(LineBelow.peek() != null) {
+                out.push(LineBelow.pop());
+            }
         }
 
 
@@ -136,14 +142,14 @@ public class ExtractSurroundings {
 
 
     public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(!isIndexInBoundsOfMatrix(matrix, lineNumber, placeInLineIndex-1)){
+        if(isIndexInBoundsOfMatrix(matrix, lineNumber, placeInLineIndex-1)){
             return matrix[lineNumber][placeInLineIndex-1];
         }
         return null;
     }
 
     public static String ExtractIndexOnTheRightInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(!isIndexInBoundsOfMatrix(matrix, lineNumber, placeInLineIndex+1)){
+        if(isIndexInBoundsOfMatrix(matrix, lineNumber, placeInLineIndex+1)){
             return matrix[lineNumber][placeInLineIndex+1];
         }
         return null;

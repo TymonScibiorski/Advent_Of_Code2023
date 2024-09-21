@@ -10,7 +10,7 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     //TODO: ExtractSurroundings: ExtractIndexOnTheLeftInMatrix (and Right) have been changed and nothing works now
-    
+
 
     public static int FinalFunctionForPartOne(){
         String[][] matrix = filledMatrix();
