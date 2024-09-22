@@ -16,7 +16,7 @@ public class ExtractSurroundings {
 
         //Adding all stacks to the outStack
         //Adding the extracted surroundings from the line above the target
-        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, lineNumber, placeInLineIndex);
+        Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
         int lineAboveSize = LineAbove.size(); // This variable has to be declared, because if the "LineAbove.size()" was put raw into the for loop then the value, size, would change dynamically
         for (int i = 0; i < lineAboveSize; i++) {
             if(LineAbove.peek() != null) {
@@ -41,7 +41,7 @@ public class ExtractSurroundings {
         return out;
     }
 
-    public static Stack<String> ExtractLineAboveInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
+    public static Stack<String> ExtractLineAboveInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
         // Extracts contents that are directly above and diagonally to the top-right and top-left to a certain target.
         // Example:
 //        String[][] matrix1 = {
@@ -65,10 +65,7 @@ public class ExtractSurroundings {
         }
 
         // Top-right diagonal, if it exists
-
-        if(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex) != null){
-            out.push(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
-        }
+        out.push(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength));
 
         return out;
     }
@@ -109,9 +106,7 @@ public class ExtractSurroundings {
         return out;
     }
 
-    public static boolean executeExtractTopRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        int targetsLength = matrix[lineNumber][placeInLineIndex].length();
-
+    public static boolean executeExtractTopRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
         for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
             if(!isIndexInBoundsOfMatrix(matrix, lineNumber-1, i)){
                 continue;
@@ -130,10 +125,8 @@ public class ExtractSurroundings {
         return true;
     }
 
-    public static String ExtractTopRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        boolean shouldBeExecuted = executeExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex);
-        boolean isInBounds = isIndexInBoundsOfMatrix(matrix, lineNumber - 1, placeInLineIndex + 1);
-        if(!isInBounds || !shouldBeExecuted){
+    public static String ExtractTopRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
+        if(!isIndexInBoundsOfMatrix(matrix, lineNumber - 1, placeInLineIndex + 1) || !executeExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength)){
             return null;
         }
         return matrix[lineNumber-1][placeInLineIndex+1];
@@ -174,15 +167,13 @@ public class ExtractSurroundings {
         out.push(ExtractBottomLeftDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
 
         // Directly below
-        Stack<String> directlyBelow = ExtractDirectlyBelowInMatrix(matrix, lineNumber, placeInLineIndex);
+        Stack<String> directlyBelow = ExtractDirectlyBelowInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
         for (int i = 0; i < directlyBelow.size(); i++) {
             out.push(directlyBelow.pop());
         }
 
         // Bottom-right diagonal, if it exists
-        if(ExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex) != null){
-            out.push(ExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
-        }
+        out.push(ExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength));
 
         return out;
     }
@@ -195,9 +186,8 @@ public class ExtractSurroundings {
         return matrix[lineNumber+1][placeInLineIndex-1];
     }
 
-    public static Stack<String> ExtractDirectlyBelowInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
+    public static Stack<String> ExtractDirectlyBelowInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
         Stack<String> out = new Stack<>();
-        int targetsLength = matrix[lineNumber][placeInLineIndex].length();
 
         for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
             if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, i)){
@@ -216,9 +206,7 @@ public class ExtractSurroundings {
         return out;
     }
 
-    public static boolean executeExtractBottomRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        int targetsLength = matrix[lineNumber][placeInLineIndex].length();
-
+    public static boolean executeExtractBottomRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
         for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
             if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, i)){
                 continue;
@@ -237,11 +225,11 @@ public class ExtractSurroundings {
         return true;
     }
 
-    public static String ExtractBottomRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
-        if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, placeInLineIndex+1) || !executeExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex)){
+    public static String ExtractBottomRightDiagonalInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
+        if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, placeInLineIndex+targetsLength) || !executeExtractBottomRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength)){
             return null;
         }
-        return matrix[lineNumber+1][placeInLineIndex+1];
+        return matrix[lineNumber+1][placeInLineIndex+targetsLength];
     }
 
     public static boolean isANumber(String str){

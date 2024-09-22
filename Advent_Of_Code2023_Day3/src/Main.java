@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //TODO: ExtractSurroundings: ExtractIndexOnTheLeftInMatrix (and Right) have been changed and nothing works now
+    //TODO: ExtractSurroundings: write tests to ExtractDirectlyBelow method, it's not working in the last test of ExtractSurroundings
 
 
     public static int FinalFunctionForPartOne(){
