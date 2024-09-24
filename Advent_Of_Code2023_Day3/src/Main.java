@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //TODO: ExtractSurroundings: write tests to ExtractDirectlyBelow method, it's not working in the last test of ExtractSurroundings
+    //TODO: ExtractSurroundings: write tests to ExtractFromLineBelow method, the last test in ExtractSurroundings is not working.
 
 
     public static int FinalFunctionForPartOne(){

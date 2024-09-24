@@ -369,11 +369,26 @@ public class MainTest {
 
         testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 0, 1, 1);
         Assert.assertEquals(".", testStack.pop());
-//        Assert.assertEquals("9", ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 0, 2, 1));
-//        Assert.assertEquals("-", ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 1, 0, 1));
-//        Assert.assertEquals("=", ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 1, 1, 1));
-//        Assert.assertEquals("+", ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 1, 2, 1));
-//        Assert.assertNull(ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 2, 0, 1));
+
+        testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 0, 2, 1);
+        Assert.assertEquals("9",testStack.pop());
+
+        testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 1, 0, 1);
+        Assert.assertEquals("-", testStack.pop());
+
+        testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 1, 2, 1);
+        Assert.assertEquals("+", testStack.pop());
+
+        String[][] matrix3 = {
+                {"a", "423", "b"},
+                {"c", "d", "e", "f", "%"}
+        };
+        testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix3, 0, 1, 3);
+        Assert.assertEquals("f", testStack.pop());
+        Assert.assertEquals("e", testStack.pop());
+        Assert.assertEquals("d", testStack.pop());
+
+        Assert.assertNull(ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 2, 0, 1).pop());
 //        Assert.assertNull(ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 2, 1, 1));
 //        Assert.assertNull(ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 2, 2, 1));
     }
