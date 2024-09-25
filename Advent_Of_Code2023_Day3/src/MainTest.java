@@ -339,6 +339,23 @@ public class MainTest {
         Assert.assertNull(null, ExtractSurroundings.ExtractIndexOnTheRightInMatrix(matrix, 2, 2));
     }
 
+    @Test
+    public void TestExtractLineBelow(){
+        String[][] matrix = {
+                {"a", "423", "b"},
+                {"c", "d", "e", "f", "%"}
+        };
+        String[] expectedOutput = {"c", "f", "e", "d", "%"};
+        boolean forAssertion = true;
+        Stack<String> testStack = ExtractSurroundings.ExtractLineBelowInMatrix(matrix, 0, 1, 3);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            if (!expectedOutput[i].equals(testStack.pop())) {
+                forAssertion = false;
+                break;
+            }
+        }
+        Assert.assertTrue(forAssertion);
+    }
 
     @Test
     public void TestExtractBottomLeftDiagonalInMatrix(){
