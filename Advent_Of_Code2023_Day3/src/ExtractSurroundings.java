@@ -168,7 +168,8 @@ public class ExtractSurroundings {
 
         // Directly below
         Stack<String> directlyBelow = ExtractDirectlyBelowInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
-        for (int i = 0; i < directlyBelow.size(); i++) {
+        int direcrlyBelowSize = directlyBelow.size(); // this int has to be declared, otherwise the size changes dynamically and the number of iterations lessens with stack being popped off of
+        for (int i = 0; i < direcrlyBelowSize; i++) {
             out.push(directlyBelow.pop());
         }
 

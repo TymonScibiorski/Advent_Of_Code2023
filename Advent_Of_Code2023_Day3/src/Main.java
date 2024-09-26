@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //TODO: ExtractSurroundings: trace why TestExtractLineBelowInMatrix test fails
+    //TODO: ExtractSurroundings: ExtractLineBelowInMatrix didn't work correctly because when info was popped of off directlyBelow stack (output of ExtractDirectlyBelow) the size (which determined the number of iterations) changed dynamically
 
 
     public static int FinalFunctionForPartOne(){
