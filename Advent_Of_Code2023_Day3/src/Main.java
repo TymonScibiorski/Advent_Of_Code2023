@@ -9,7 +9,9 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //TODO: ExtractSurroundings: the answer 294732 is too low
+    //ExtractSurroundings: the answer 294732 is too low
+    //TODO: Write more tests, until one fails and solve the issues that come out.
+
 
 
     public static int FinalFunctionForPartOne(){
