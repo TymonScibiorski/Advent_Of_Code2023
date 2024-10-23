@@ -24,63 +24,63 @@ public class ExtractSurroundingsTest {
 
     @Test
     public void TestIsAPartNumber(){
-        String[][] matrix = {
-                {".", ".", "."},
-                {".", "1", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix, 1, 1)
-        );
-        String[][] matrix1 = {
-                {".", ".", "."},
-                {"1", ".", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix1, 1, 0)
-        );
-
-        String[][] matrix2 = {
-                {"$", "#", "@"},
-                {"*", "1", "%"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix2, 1, 1)
-        );
-        String[][] matrix3 = {
-                {"$", "#", "@"},
-                {"*", "%", "1"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix3, 1, 2)
-        );
-
-        String[][] matrix4 = {
-                {".", "423", "."},
-                {".", ".", ".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix4, 0, 1)
-        );
-
-        String[][] matrix5 = {
-                {".", "423", "."},
-                {".", ".", "%", ".", "."}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix5, 0, 1)
-        );
-
-        String[][] matrix6 = {
-                {".", "423", "."},
-                {".", ".", ".", ".", "%"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix6, 0, 1)
-        );
+//        String[][] matrix = {
+//                {".", ".", "."},
+//                {".", "1", "."},
+//                {".", ".", "."}
+//        };
+//        Assert.assertFalse(
+//                Main.IsAPartNumber(matrix, 1, 1)
+//        );
+//        String[][] matrix1 = {
+//                {".", ".", "."},
+//                {"1", ".", "."},
+//                {".", ".", "."}
+//        };
+//        Assert.assertFalse(
+//                Main.IsAPartNumber(matrix1, 1, 0)
+//        );
+//
+//        String[][] matrix2 = {
+//                {"$", "#", "@"},
+//                {"*", "1", "%"},
+//                {"-", "=", "+"}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix2, 1, 1)
+//        );
+//        String[][] matrix3 = {
+//                {"$", "#", "@"},
+//                {"*", "%", "1"},
+//                {"-", "=", "+"}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix3, 1, 2)
+//        );
+//
+//        String[][] matrix4 = {
+//                {".", "423", "."},
+//                {".", ".", ".", ".", "."}
+//        };
+//        Assert.assertFalse(
+//                Main.IsAPartNumber(matrix4, 0, 1)
+//        );
+//
+//        String[][] matrix5 = {
+//                {".", "423", "."},
+//                {".", ".", "%", ".", "."}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix5, 0, 1)
+//        );
+//
+//        String[][] matrix6 = {
+//                {".", "423", "."},
+//                {".", ".", ".", ".", "%"}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix6, 0, 1)
+//        );
 
         String[][] matrix7 = {
                 {"$", ".", "1"},
@@ -89,7 +89,8 @@ public class ExtractSurroundingsTest {
         };
         Assert.assertTrue(
                 Main.IsAPartNumber(matrix7, 0, 2)
-        );
+        ); //Isn't working because in the ExtractSurroundings function, if an item in the i. e. "LineAbove" stack is null it's just stepped over.
+        // If null is first (sometimes nulls get added to the stacks, that are later to be stripped) then the rest of the stack won't be added. Rewrite code so nulls do not get added.
     }
 
     @Test

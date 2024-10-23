@@ -10,7 +10,7 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     //ExtractSurroundings: the answer 294732 is too low
-    //TODO: Write more tests, until one fails and solve the issues that come out.
+    //TODO: Last test in the ExtractSurroundingsTest.java file is failing, explanation left by the test, the issue is to be fixed.
 
 
 
