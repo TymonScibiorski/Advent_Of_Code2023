@@ -35,6 +35,9 @@ public class ExtractSurroundings {
             if(LineBelow.peek() != null) {
                 out.push(LineBelow.pop());
             }
+            if(LineBelow.peek() == null && LineBelow.size() > 0){
+                LineBelow.pop();
+            }
         }
 
 

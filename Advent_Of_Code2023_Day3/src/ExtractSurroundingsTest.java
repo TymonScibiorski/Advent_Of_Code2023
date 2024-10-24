@@ -91,6 +91,7 @@ public class ExtractSurroundingsTest {
                 Main.IsAPartNumber(matrix7, 0, 2)
         ); //Isn't working because in the ExtractSurroundings function, if an item in the i. e. "LineAbove" stack is null it's just stepped over.
         // If null is first (sometimes nulls get added to the stacks, that are later to be stripped) then the rest of the stack won't be added. Rewrite code so nulls do not get added.
+        //Turns out it's not feasible to make functions not return nulls, so a popper of nulls was added, but for some reason it pops off of stacks that are sized below zero, despite the if. To be fixed.
     }
 
     @Test
