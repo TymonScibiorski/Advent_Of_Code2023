@@ -21,6 +21,8 @@ public class ExtractSurroundings {
         for (int i = 0; i < lineAboveSize; i++) {
             if(LineAbove.peek() != null) {
                 out.push(LineAbove.pop());
+            } else if (LineAbove.peek() == null && !LineAbove.isEmpty()) {
+                LineAbove.pop();
             }
         }
 
@@ -34,13 +36,11 @@ public class ExtractSurroundings {
         for (int i = 0 ; i < lineBelowSize; i++) {
             if(LineBelow.peek() != null) {
                 out.push(LineBelow.pop());
-            }
-            if(LineBelow.peek() == null && LineBelow.size() > 0){
+            } else if (LineBelow.peek() == null && !LineBelow.isEmpty()) {
                 LineBelow.pop();
             }
         }
-
-
+        
         return out;
     }
 
