@@ -17,12 +17,9 @@ public class ExtractSurroundings {
         //Adding all stacks to the outStack
         //Adding the extracted surroundings from the line above the target
         Stack<String> LineAbove = ExtractLineAboveInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
-        int lineAboveSize = LineAbove.size(); // This variable has to be declared, because if the "LineAbove.size()" was put raw into the for loop then the value, size, would change dynamically
-        for (int i = 0; i < lineAboveSize; i++) {
-            if(LineAbove.peek() != null) {
-                out.push(LineAbove.pop());
-            } else if (LineAbove.peek() == null && !LineAbove.isEmpty()) {
-                LineAbove.pop();
+        for (String oneFromLineAbove : LineAbove) {
+            if(oneFromLineAbove != null) {
+                out.push(oneFromLineAbove);
             }
         }
 
@@ -32,15 +29,12 @@ public class ExtractSurroundings {
 
         //Adding the extracted surroundings from the line below the target
         Stack<String> LineBelow = ExtractLineBelowInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
-        int lineBelowSize = LineBelow.size(); // This variable has to be declared, because if the "LineBelow.size()" was put raw into the for loop then the value, size, would change dynamically
-        for (int i = 0 ; i < lineBelowSize; i++) {
-            if(LineBelow.peek() != null) {
-                out.push(LineBelow.pop());
-            } else if (LineBelow.peek() == null && !LineBelow.isEmpty()) {
-                LineBelow.pop();
+        for (String oneFromLineBelow : LineBelow) {
+            if(oneFromLineBelow != null) {
+                out.push(oneFromLineBelow);
             }
         }
-        
+
         return out;
     }
 
@@ -62,9 +56,9 @@ public class ExtractSurroundings {
         out.push(ExtractTopLeftDiagonalInMatrix(matrix, lineNumber, placeInLineIndex));
 
         // Directly above
-        Stack<String> directlyAbove = ExtractDirectlyOnTopInMatrix(matrix, lineNumber, placeInLineIndex);
-        for (int i = 0; i < directlyAbove.size(); i++) {
-            out.push(directlyAbove.pop());
+        Stack<String> directlyAbove = ExtractDirectlyOnTopInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
+        for (String oneFromDirectlyAbove : directlyAbove) {
+            out.push(oneFromDirectlyAbove);
         }
 
         // Top-right diagonal, if it exists
@@ -80,7 +74,7 @@ public class ExtractSurroundings {
         return matrix[lineNumber-1][placeInLineIndex-1];
     }
 
-    public static Stack<String> ExtractDirectlyOnTopInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
+    public static Stack<String> ExtractDirectlyOnTopInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
         // Extracts directly above the target string.
         // Example:
 //        String[][] matrix = {
@@ -90,7 +84,6 @@ public class ExtractSurroundings {
 //        };
         // For index 1, 1 the output Stack will contain ".". For index 0,2 the output Stack will contain null
         Stack<String> out = new Stack<>();
-        int targetsLength = matrix[lineNumber][placeInLineIndex].length();
 
         for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
             if(!isIndexInBoundsOfMatrix(matrix, lineNumber-1, i)){
@@ -135,8 +128,6 @@ public class ExtractSurroundings {
         return matrix[lineNumber-1][placeInLineIndex+1];
     }
 
-
-
     public static String ExtractIndexOnTheLeftInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex){
         if(isIndexInBoundsOfMatrix(matrix, lineNumber, placeInLineIndex-1)){
             return matrix[lineNumber][placeInLineIndex-1];
@@ -150,7 +141,6 @@ public class ExtractSurroundings {
         }
         return null;
     }
-
 
     public static Stack<String> ExtractLineBelowInMatrix(String[][] matrix, int lineNumber, int placeInLineIndex, int targetsLength){
         // Extracts contents that are directly above and diagonally to the top-right and top-left to a certain target.
@@ -171,9 +161,8 @@ public class ExtractSurroundings {
 
         // Directly below
         Stack<String> directlyBelow = ExtractDirectlyBelowInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength);
-        int direcrlyBelowSize = directlyBelow.size(); // this int has to be declared, otherwise the size changes dynamically and the number of iterations lessens with stack being popped off of
-        for (int i = 0; i < direcrlyBelowSize; i++) {
-            out.push(directlyBelow.pop());
+        for (String oneFromDirectlyBelow : directlyBelow) {
+            out.push(oneFromDirectlyBelow);
         }
 
         // Bottom-right diagonal, if it exists

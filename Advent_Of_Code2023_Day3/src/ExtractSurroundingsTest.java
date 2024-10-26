@@ -8,93 +8,6 @@ import java.util.Stack;
 
 public class ExtractSurroundingsTest {
     @Test
-    public void TestCreateMatrix(){
-        String[][] matrix = Main.createMatrix();
-        boolean isFilledWithNulls = true;
-
-        for (int i = 0; i < matrix.length; i++) {
-            if(matrix[i] != null){
-                isFilledWithNulls = false;
-            }
-        }
-
-        Assert.assertEquals(matrix.length, 140);
-        Assert.assertTrue(isFilledWithNulls);
-    }
-
-    @Test
-    public void TestIsAPartNumber(){
-        String[][] matrix = {
-                {".", ".", "."},
-                {".", "1", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix, 1, 1)
-        );
-        String[][] matrix1 = {
-                {".", ".", "."},
-                {"1", ".", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix1, 1, 0)
-        );
-
-        String[][] matrix2 = {
-                {"$", "#", "@"},
-                {"*", "1", "%"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix2, 1, 1)
-        );
-        String[][] matrix3 = {
-                {"$", "#", "@"},
-                {"*", "%", "1"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix3, 1, 2)
-        );
-
-        String[][] matrix4 = {
-                {".", "423", "."},
-                {".", ".", ".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix4, 0, 1)
-        );
-
-        String[][] matrix5 = {
-                {".", "423", "."},
-                {".", ".", "%", ".", "."}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix5, 0, 1)
-        );
-
-        String[][] matrix6 = {
-                {".", "423", "."},
-                {".", ".", ".", ".", "%"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix6, 0, 1)
-        );
-
-        String[][] matrix7 = {
-                {"$", ".", "1"},
-                {"*", ".", "@"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix7, 0, 2)
-        ); //Isn't working because in the ExtractSurroundings function, if an item in the i. e. "LineAbove" stack is null it's just stepped over.
-        // If null is first (sometimes nulls get added to the stacks, that are later to be stripped) then the rest of the stack won't be added. Rewrite code so nulls do not get added.
-        //Turns out it's not feasible to make functions not return nulls, so a popper of nulls was added, but for some reason it pops off of stacks that are sized below zero, despite the if. To be fixed.
-    }
-
-    @Test
     public void TestExtractSurroundings(){
         String[][] matrix = {
                 {"$", ".", "1"},
@@ -236,10 +149,10 @@ public class ExtractSurroundingsTest {
                 {"*", ".", "@"},
                 {"-", "=", "+"}
         };
-        Assert.assertEquals(".", ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 1, 1).pop());
-        Assert.assertNull(ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 0, 0).pop());
-        Assert.assertNull(ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 0, 1).pop());
-        Assert.assertNull(ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 0, 2).pop());
+        Assert.assertEquals(".", ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 1, 1, 1).pop());
+        Assert.assertNull(ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 0, 0, 1).pop());
+        Assert.assertNull(ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 0, 1, 1).pop());
+        Assert.assertNull(ExtractSurroundings.ExtractDirectlyOnTopInMatrix(matrix, 0, 2, 1).pop());
 
         String[][] matrix1 = {
                 {"*", ".", "@", "5"},

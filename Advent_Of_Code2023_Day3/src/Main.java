@@ -9,8 +9,8 @@ public class Main {
 
         System.out.println(FinalFunctionForPartOne());
     }
-    //ExtractSurroundings: the answer 294732 is too low
-    //TODO: Last test in the ExtractSurroundingsTest.java file is failing, explanation left by the test, the issue is to be fixed.
+    //323390 is the wrong answer
+    //TODO: Every tests seems to be working, so more must be added so the error can be detected.
 
 
 
