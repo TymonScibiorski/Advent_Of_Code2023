@@ -171,6 +171,7 @@ public class MainTest {
     public void TestSumAllNumbersInAnArray(){
         Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{99, 1}), 100);
         Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{467, 35, 633, 617, 592, 755, 664, 598}), 4361);
+        Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}), 99);
     }
 
     @Test

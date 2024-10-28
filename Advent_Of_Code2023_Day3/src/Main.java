@@ -10,7 +10,7 @@ public class Main {
         System.out.println(FinalFunctionForPartOne());
     }
     //323390 is the wrong answer
-    //TODO: Every tests seems to be working, so more must be added so the error can be detected.
+    //TODO: Every tests seems to be working, so more must be added so the error can be detected. Some older tests for ExtractSurroundings aren't working, probably because of the order of inputs in stacks. Easy fix.
 
 
 
