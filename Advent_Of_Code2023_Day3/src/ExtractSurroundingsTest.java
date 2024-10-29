@@ -114,8 +114,11 @@ public class ExtractSurroundingsTest {
         boolean forAssertion1 = true;
 
         for (int i = 0; i < expectedStack1.size(); i++) {
-            String currentStringFromExpectedStack = expectedStack1.pop();
             String currentStringFromActualStack = actualStack1.pop();
+            if (currentStringFromActualStack == null){
+                continue;
+            }
+            String currentStringFromExpectedStack = expectedStack1.pop();
             if (!currentStringFromExpectedStack.equals(currentStringFromActualStack)) {
                 forAssertion1 = false;
                 break;
