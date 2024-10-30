@@ -15,14 +15,14 @@ public class ExtractSurroundingsTest {
                 {"-", "=", "+"}
         };
         Stack<String> expectedStack = new Stack<>();
-        expectedStack.push("1");
-        expectedStack.push(".");
         expectedStack.push("$");
+        expectedStack.push(".");
+        expectedStack.push("1");
         expectedStack.push("*");
         expectedStack.push("@");
-        expectedStack.push("+");
-        expectedStack.push("=");
         expectedStack.push("-");
+        expectedStack.push("=");
+        expectedStack.push("+");
         Stack<String> actualStack = ExtractSurroundings.ExtractSurroundings(matrix, 1, 1);
         boolean forAssertion = true;
 
@@ -41,14 +41,15 @@ public class ExtractSurroundingsTest {
                 {"*", ".", "@", "5"},
                 {"-", "=", "+", "."}
         };
+        // "1" should be missing because 46 expands beyond a one character
         Stack<String> expectedStack1 = new Stack<>();
-        expectedStack1.push("46");
         expectedStack1.push("$");
+        expectedStack1.push("46");
         expectedStack1.push("*");
         expectedStack1.push("@");
-        expectedStack1.push("+");
-        expectedStack1.push("=");
         expectedStack1.push("-");
+        expectedStack1.push("=");
+        expectedStack1.push("+");
         Stack<String> actualStack1 = ExtractSurroundings.ExtractSurroundings(matrix1, 1, 1);
         forAssertion = true;
 
@@ -66,7 +67,7 @@ public class ExtractSurroundingsTest {
                 {"a", "423", "b"},
                 {"c", "d", "e", "f", "%"}
         };
-        String[] expectedOutput = {"c", "f", "e", "d", "%", "b", "a"};
+        String[] expectedOutput = {"%", "f", "e", "d", "c", "b", "a"};
         forAssertion = true;
         Stack<String> testStack = ExtractSurroundings.ExtractSurroundings(matrix2, 0, 1);
         for (String s : expectedOutput) {
@@ -249,7 +250,7 @@ public class ExtractSurroundingsTest {
                 {"a", "423", "b"},
                 {"c", "d", "e", "f", "%"}
         };
-        String[] expectedOutput = {"%", "d", "e", "f", "c"};
+        String[] expectedOutput = {"%", "f", "e", "d", "c"};
         boolean forAssertion = true;
         Stack<String> testStack = ExtractSurroundings.ExtractLineBelowInMatrix(matrix, 0, 1, 3);
         for (int i = 0; i < expectedOutput.length; i++) {
