@@ -138,6 +138,39 @@ public class MainTest {
                                 Main.RawInputLineToStrArray("....*")
                         }, 1,1
                 ));
+
+        Assert.assertTrue(
+                Main.IsAPartNumber(
+                        new String[][]{
+                                Main.RawInputLineToStrArray("....."),
+                                Main.RawInputLineToStrArray(".653+"),
+                                Main.RawInputLineToStrArray(".....")
+                        }, 1, 1
+                ));
+        Assert.assertTrue(
+                Main.IsAPartNumber(
+                        new String[][]{
+                                Main.RawInputLineToStrArray("...."),
+                                Main.RawInputLineToStrArray("*86."),
+                                Main.RawInputLineToStrArray("....")
+                        }, 1, 1
+                ));
+        Assert.assertTrue(
+                Main.IsAPartNumber(
+                        new String[][]{
+                                Main.RawInputLineToStrArray("....."),
+                                Main.RawInputLineToStrArray(".972."),
+                                Main.RawInputLineToStrArray("....*")
+                        }, 1, 1
+                ));
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(
+//                        new String[][]{
+//                                Main.RawInputLineToStrArray(""),
+//                                Main.RawInputLineToStrArray(""),
+//                                Main.RawInputLineToStrArray("")
+//                        }, ,
+//                ));
     }
 
 
