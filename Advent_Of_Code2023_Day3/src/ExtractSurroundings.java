@@ -64,6 +64,7 @@ public class ExtractSurroundings {
         // Top-right diagonal, if it exists
         out.push(ExtractTopRightDiagonalInMatrix(matrix, lineNumber, placeInLineIndex, targetsLength));
 
+
         return out;
     }
 

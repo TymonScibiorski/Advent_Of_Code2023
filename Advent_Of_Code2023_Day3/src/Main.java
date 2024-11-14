@@ -11,6 +11,7 @@ public class Main {
     }
     //323390 is the wrong answer
     //TODO: Add more tests until one fails, fix the cause, repeat.
+    //TODO: Made a tests that fails, MainTest.TestIsAPartNumber. It seems that ExtractSurroundings' ExtractFromLineBelow's malfunctioning.
 
 
 

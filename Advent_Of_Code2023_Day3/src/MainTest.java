@@ -29,72 +29,89 @@ public class MainTest {
 
     @Test
     public void TestIsAPartNumber(){
-        String[][] matrix = {
-                {".", ".", "."},
-                {".", "1", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix, 1, 1)
-        );
-        String[][] matrix1 = {
-                {".", ".", "."},
-                {"1", ".", "."},
-                {".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix1, 1, 0)
-        );
+//        String[][] matrix = {
+//                {".", ".", "."},
+//                {".", "1", "."},
+//                {".", ".", "."}
+//        };
+//        Assert.assertFalse(
+//                Main.IsAPartNumber(matrix, 1, 1)
+//        );
+//        String[][] matrix1 = {
+//                {".", ".", "."},
+//                {"1", ".", "."},
+//                {".", ".", "."}
+//        };
+//        Assert.assertFalse(
+//                Main.IsAPartNumber(matrix1, 1, 0)
+//        );
+//
+//        String[][] matrix2 = {
+//                {"$", "#", "@"},
+//                {"*", "1", "%"},
+//                {"-", "=", "+"}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix2, 1, 1)
+//        );
+//        String[][] matrix3 = {
+//                {"$", "#", "@"},
+//                {"*", "%", "1"},
+//                {"-", "=", "+"}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix3, 1, 2)
+//        );
+//
+//        String[][] matrix4 = {
+//                {".", "423", "."},
+//                {".", ".", ".", ".", "."}
+//        };
+//        Assert.assertFalse(
+//                Main.IsAPartNumber(matrix4, 0, 1)
+//        );
+//
+//        String[][] matrix5 = {
+//                {".", "423", "."},
+//                {".", ".", "%", ".", "."}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix5, 0, 1)
+//        );
+//
+//        String[][] matrix6 = {
+//                {".", "423", "."},
+//                {".", ".", ".", ".", "%"}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix6, 0, 1)
+//        );
+//
+//        String[][] matrix7 = {
+//                {"$", ".", "1"},
+//                {"*", ".", "@"},
+//                {"-", "=", "+"}
+//        };
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(matrix7, 0, 2)
+//        );
 
-        String[][] matrix2 = {
-                {"$", "#", "@"},
-                {"*", "1", "%"},
-                {"-", "=", "+"}
+        String[][] matrix8 = {
+                Main.RawInputLineToStrArray(".......*372..747."),
+                Main.RawInputLineToStrArray("....684.........."),
+                Main.RawInputLineToStrArray("...........487..."),
+                Main.RawInputLineToStrArray(".....&.574.*....."),
+                Main.RawInputLineToStrArray("..374....+.307..."),
+                Main.RawInputLineToStrArray(".................")
         };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix2, 1, 1)
-        );
-        String[][] matrix3 = {
-                {"$", "#", "@"},
-                {"*", "%", "1"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix3, 1, 2)
-        );
-
-        String[][] matrix4 = {
-                {".", "423", "."},
-                {".", ".", ".", ".", "."}
-        };
-        Assert.assertFalse(
-                Main.IsAPartNumber(matrix4, 0, 1)
-        );
-
-        String[][] matrix5 = {
-                {".", "423", "."},
-                {".", ".", "%", ".", "."}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix5, 0, 1)
-        );
-
-        String[][] matrix6 = {
-                {".", "423", "."},
-                {".", ".", ".", ".", "%"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix6, 0, 1)
-        );
-
-        String[][] matrix7 = {
-                {"$", ".", "1"},
-                {"*", ".", "@"},
-                {"-", "=", "+"}
-        };
-        Assert.assertTrue(
-                Main.IsAPartNumber(matrix7, 0, 2)
-        );
+        Assert.assertTrue(Main.IsAPartNumber(matrix8, 0, 8));
+        Assert.assertFalse(Main.IsAPartNumber(matrix8, 0, 11));
+        Assert.assertFalse(Main.IsAPartNumber(matrix8, 1, 5));
+        Assert.assertTrue(Main.IsAPartNumber(matrix8, 2, 12));
+//        Assert.assertTrue(Main.IsAPartNumber(matrix8, ,));
+//        Assert.assertTrue(Main.IsAPartNumber(matrix8, ,));
+//        Assert.assertTrue(Main.IsAPartNumber(matrix8, ,));
+//        Assert.assertTrue(Main.IsAPartNumber(matrix8, ,));
 
         Assert.assertTrue(
                 Main.IsAPartNumber(new String[][]{
@@ -163,6 +180,17 @@ public class MainTest {
                                 Main.RawInputLineToStrArray("....*")
                         }, 1, 1
                 ));
+
+
+
+//        Assert.assertTrue(
+//                Main.IsAPartNumber(
+//                        new String[][]{
+//                                Main.RawInputLineToStrArray(""),
+//                                Main.RawInputLineToStrArray(""),
+//                                Main.RawInputLineToStrArray("")
+//                        }, ,
+//                ));
 //        Assert.assertTrue(
 //                Main.IsAPartNumber(
 //                        new String[][]{
@@ -205,6 +233,7 @@ public class MainTest {
         Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{99, 1}), 100);
         Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{467, 35, 633, 617, 592, 755, 664, 598}), 4361);
         Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}), 99);
+        Assert.assertEquals(Main.SumAllNumbersInAnArray(new int[]{232342342}), 232342342);
     }
 
     @Test
