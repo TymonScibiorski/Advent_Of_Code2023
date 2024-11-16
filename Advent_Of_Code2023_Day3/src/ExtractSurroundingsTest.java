@@ -1,6 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.net.ContentHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
@@ -301,18 +302,28 @@ public class ExtractSurroundingsTest {
         testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 1, 2, 1);
         Assert.assertEquals("+", testStack.pop());
 
-        String[][] matrix3 = {
+        String[][] matrix1 = {
                 {"a", "423", "b"},
                 {"c", "d", "e", "f", "%"}
         };
-        testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix3, 0, 1, 3);
+        testStack = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix1, 0, 1, 3);
         Assert.assertEquals("f", testStack.pop());
         Assert.assertEquals("e", testStack.pop());
         Assert.assertEquals("d", testStack.pop());
 
-        Assert.assertNull(ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 2, 0, 1).pop());
 //        Assert.assertNull(ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 2, 1, 1));
 //        Assert.assertNull(ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix, 2, 2, 1));
+
+        String[][] matrix2 = {
+                Main.RawInputLineToStrArray("....487..."),
+                Main.RawInputLineToStrArray("574.*.....")
+        };
+        Stack<String> contentBelow487 = ExtractSurroundings.ExtractDirectlyBelowInMatrix(matrix2, 0, 5, 3);
+        Assert.assertEquals(".", contentBelow487.pop());
+        Assert.assertEquals("*", contentBelow487.pop());
+        Assert.assertEquals(".", contentBelow487.pop());
+        Assert.assertEquals(".", contentBelow487.pop());
+        Assert.assertEquals(".", contentBelow487.pop());
     }
 
     @Test

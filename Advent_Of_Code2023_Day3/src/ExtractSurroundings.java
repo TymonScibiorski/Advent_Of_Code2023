@@ -185,7 +185,6 @@ public class ExtractSurroundings {
 
         for (int i = placeInLineIndex; i < placeInLineIndex+targetsLength; i++) {
             if(!isIndexInBoundsOfMatrix(matrix, lineNumber+1, i)){
-                out.push(null);
                 continue;
             }
             String currentString = matrix[lineNumber+1][i];
